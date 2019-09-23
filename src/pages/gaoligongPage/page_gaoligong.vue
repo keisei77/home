@@ -3,21 +3,14 @@
 */
 <template lang="pug">
   div
-    div(class='slide_box')
+    div(class='slide_box' :style="{backgroundImage:'url('+mainImage+')'}")
     div(class='gaoligong_info')
       div(class='gaoligong_title') 高黎贡山生态系统总览
-      div(class='gaoligong_msg' v-html="gaoligong_msg")
+      div(class='gaoligong_msg' v-html="gaoligong_data.description")
       div(class='gaoligong_group')
           div(class="gaoligong_list_box" v-for='(gaoItem,index) of gaoligong_data.children' :key='index')
             img(class="img_box" :src="gaoItem.imgUrl")
             a(id="detail" href="#") {{gaoItem.name}}
-
-          //- div(class="gaoligong_list_box")
-          //-   img(class="img_box" src="../../../src/images/bird1.png")
-          //-   a(href="/gaoligongprotect.html") 保护工作 
-          //- div(class="gaoligong_list_box")
-          //-   img(class="img_box" src="../../../src/images/bird1.png")
-          //-   a(id="detail" href="#") 历史人文
     FooterTab    
 </template>
 <script>
@@ -32,86 +25,88 @@ const msg = `<p>气候年均温15左右，谷地因焚风作用而形成干热�
 <p>中山湿性常绿阔叶林、低海拔季风湿性常绿阔叶林、亚高山云南铁杉林、亚高山箭竹-杜鹃林、山顶苔藓林。</p>
 <p>半常绿季雨林、河谷稀树灌木草丛、暖性针叶林、热性竹林、季风常绿阔叶林、半湿润常绿阔叶林、中山湿性常绿阔叶林、暖湿性针叶林、温凉性针叶林、山顶苔藓矮林、寒温性针叶林、寒温性竹林、寒温性灌丛、寒温性草甸。</p>`
 export default {
-  components:{
-        FooterTab
-      },
+  components: {
+    FooterTab
+  },
   data: () => {
     return {
       gaoligong_msg: msg,
-      gaoligong_data: {}
+      gaoligong_data: {},
+      mainImage: ''
     }
   },
-  mounted(){
-    console.log("hello,i am gaoligong")
+  mounted() {
+    console.log('hello,i am gaoligong')
     this.$_get(API.GAOLIGONG_DATA)
-    .then(res => {
-      //console.log(res.data)
-      this.gaoligong_data = res.data
-    })
-    .catch(err => {console.log(err)})
+      .then(res => {
+        //console.log(res.data)
+        this.gaoligong_data = res.data
+        this.mainImage = JSON.parse(res.data.mainImageUrl)[0]
+      })
+      .catch(err => {
+        console.log(err)
+      })
   }
 }
 </script>
 
 <style lang="scss" scoped>
-  .slide_box{
-    width: 100%;
-    height: 900px;
-    background-image: url('../../../src/images/slide2.png')
-  }
-  .gaoligong_info{
-    width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    flex-wrap: wrap;
-  }
-  .gaoligong_title{
-    width: 100%;
-    height: 174px;
-    line-height:  174px;
-    font-family: PingFangSC-Semibold;
-    font-size: 34px;
-    color: #2D2F29;
-    text-align:center;
-  }
-  .gaoligong_msg{
-    width: 100%;
-    height: 397px;
-    font-family: PingFangSC-Regular;
-    font-size: 14px;
-    color: #9D9E9C;
-    line-height: 24px;
-  }
-  .gaoligong_group{
-    width: 1200px;
-    height:547px;
-    position: relative;
-  }
-  .gaoligong_list_box{
-    
-    width:382px;
-    height:465px;
-    background: #FFFFFF;
-    float:left;
-    margin-bottom:50px;
-    cursor:pointer;
-    box-shadow: 0 11px 37px 0 rgba(220,220,220,0.50);
-    margin-right: 27px;
-  }
-  a{
-    display:block;
-    text-decoration:none;
-    font-family:PingFangSC-Semibold;
-    font-size:26px;
-    color: #2D2F29;
-    line-height:37px;
-    text-align:center;
-    margin-top:20px;
-  }
-  .gaoligong_list_box:nth-child(3){
-    position: absolute;
-    top: 0;
-    right: 0;
-    margin-right: 0;
-  }
+.slide_box {
+  width: 100%;
+  height: 900px;
+}
+.gaoligong_info {
+  width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+}
+.gaoligong_title {
+  width: 100%;
+  height: 174px;
+  line-height: 174px;
+  font-family: PingFangSC-Semibold;
+  font-size: 34px;
+  color: #2d2f29;
+  text-align: center;
+}
+.gaoligong_msg {
+  width: 100%;
+  height: 397px;
+  font-family: PingFangSC-Regular;
+  font-size: 14px;
+  color: #9d9e9c;
+  line-height: 24px;
+}
+.gaoligong_group {
+  width: 1200px;
+  height: 547px;
+  position: relative;
+}
+.gaoligong_list_box {
+  width: 382px;
+  height: 465px;
+  background: #ffffff;
+  float: left;
+  margin-bottom: 50px;
+  cursor: pointer;
+  box-shadow: 0 11px 37px 0 rgba(220, 220, 220, 0.5);
+  margin-right: 27px;
+}
+a {
+  display: block;
+  text-decoration: none;
+  font-family: PingFangSC-Semibold;
+  font-size: 26px;
+  color: #2d2f29;
+  line-height: 37px;
+  text-align: center;
+  margin-top: 20px;
+}
+.gaoligong_list_box:nth-child(3) {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-right: 0;
+}
 </style>
