@@ -26,7 +26,8 @@
 </template>
 <script>
 export default {
-  name: "aboutmePage",
+	name: "aboutmePage",
+	props:['content'],
   data() {
     return {
 			hiddenLeftSlideStatus: false,

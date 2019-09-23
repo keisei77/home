@@ -30,8 +30,8 @@ const entriesJs = [
 const entries = (entriesArray) => {
   let jsPaths = {}
   let files = entriesArray ? entriesArray : fs.readdirSync(ENTRY_PATH)
-  for (let file of files){
-    if(fs.statSync(path.join(ENTRY_PATH, file)).isFile()){
+  for (let file of files) {
+    if (fs.statSync(path.join(ENTRY_PATH, file)).isFile()) {
       let name = path.parse(file).name
       jsPaths[name] = path.join(ENTRY_PATH, name)
     }
@@ -43,14 +43,14 @@ const entries = (entriesArray) => {
 const views = () => {
   let pages = []
   let files = fs.readdirSync(PAGES_PATH)
-  for ( file of files ) {
+  for (file of files) {
     if (fs.statSync(path.join(PAGES_PATH, file)).isFile()) {
       let name = path.parse(file).name
       let ext = path.parse(file).ext
       pages.push(new HtmlWebpackPlugin({
         filename: `${name}.html`,
         template: path.join(PAGES_PATH, `${name}${ext}`),
-        chunks: ['vue','axios','common',`${name}`],
+        chunks: ['vue', 'axios', 'common', `${name}`],
         chunksSortMode: 'manual',
         minify: {
           collapseWhitespace: true
@@ -66,7 +66,7 @@ const generateConfig = (isProd, isCompress) => {
     spritePath: "images",
     filterBy: function (image) {
       if (image.url.indexOf('/images/sprites/') === -1) {
-          return Promise.reject()
+        return Promise.reject()
       }
       return Promise.resolve()
     },
@@ -112,7 +112,7 @@ const generateConfig = (isProd, isCompress) => {
   ]
 
   let styleLoader = [
-    isProd ? { loader: MiniCssExtractPlugin.loader, options: { publicPath: '../'} }:'vue-style-loader',
+    isProd ? { loader: MiniCssExtractPlugin.loader, options: { publicPath: '../' } } : 'vue-style-loader',
     {
       loader: "css-loader",
       options: {
@@ -134,15 +134,15 @@ const generateConfig = (isProd, isCompress) => {
       loader: "sass-loader"
     }
   ]
-  
+
   let imageLoader = [
     {
       loader: "url-loader",
       options: {
         name: isProd ? "[name]-[hash:5].min.[ext]" : "[name].[ext]",
-        limit: 1024*10,
+        limit: 1024 * 10,
         outputPath: "images",
-      } 
+      }
     },
     {
       loader: "img-loader"
@@ -154,7 +154,7 @@ const generateConfig = (isProd, isCompress) => {
       loader: 'url-loader',
       options: {
         name: isProd ? "[name]-[hash:5].min.[ext]" : "[name].[ext]",
-        limit: 1024*5,
+        limit: 1024 * 5,
         outputPath: "font",
       }
     }
@@ -181,7 +181,7 @@ const generateConfig = (isProd, isCompress) => {
       rules: [
         { test: /\.vue$/, use: vueLoader },
         { test: /\.pug$/, oneOf: pugLoader },
-        { test: /\.js$/, use: scriptLoader, exclude: /(node_modules)/},
+        { test: /\.js$/, use: scriptLoader, exclude: /(node_modules)/ },
         { test: /\.(scss|css)$/, use: styleLoader },
         { test: /\.(png|jpg|jpeg|gif)$/, use: imageLoader },
         { test: /\.(eot|woff2?|ttf|svg)$/, use: fontLoader },
@@ -195,7 +195,7 @@ const generateConfig = (isProd, isCompress) => {
       isCompress ? new CompressionPlugin({
         test: new RegExp(/\.(js|css)$/),
         threshold: 10240,
-      }) : (() => {})
+      }) : (() => { })
     ].concat(views())
   }
 }

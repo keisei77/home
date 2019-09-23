@@ -3,36 +3,36 @@
     .banner-box
       .swiper-point
         ul
-          li(v-for="(item, index) of responseData" :class="{active : index == currentIndex}")
+          li(v-for="(item, index) of swiperList" :class="{active : index == currentIndex}")
       .swiper-box
         .swiper-box-item(
-          v-for="(item, index) of responseData"
+          v-for="(item, index) of swiperList"
           :class="{current: currentIndex == index, prev: prevIndex == index}"
         )
           .swiper-box-item-bg(
-            :style="{ backgroundImage: `url(${item.img})` }"
+            :style="{ backgroundImage: `url(${item.imgUrl})` }"
           )
           .swiper-box-item-mirror(
-            :style="{ backgroundImage: `url(${item.img})` }"
+            :style="{ backgroundImage: `url(${item.imgUrl})` }"
           )
       .info-box
         .info-box-item.animated.slow(
-          v-for="(item, index) of responseData"
+          v-for="(item, index) of swiperList"
           :class="[index == currentIndex ? 'fadeIn' : 'fadeOut', index == currentIndex ? 'delay-2s' : '']"
         )
           .info-box-item-tit {{item.title}}
           .line
-          .info-box-item-sub {{item.subTitle}}
+          .info-box-item-sub {{item.shortContent}}
           .info-box-item-link
-            a(:href="item.link") 查看更多 >
+            a(:href="item.imgLink") 查看更多 >
       .control-box
         .control-info-box
           .control-info-box-item.animated.slow(
-            v-for="(item, index) of responseData"
+            v-for="(item, index) of swiperList"
             :class="[index == currentIndex ? 'fadeIn' : 'fadeOut', index == currentIndex ? 'delay-2s' : '']"
           )
-            .control-info-box-item-tit {{item.indexInfoTitle}}
-            .control-info-box-item-sub {{item.indexInfoSub}}
+            .control-info-box-item-tit {{item.title}}
+            .control-info-box-item-sub {{item.content}}
         .btn-box
           button(@click="propPage()") <
           button(@click="nextPage()") >
@@ -41,6 +41,7 @@
 <script>
   import _ from 'lodash'
   export default {
+    props:['swiperList'],
     data () {
       return {
         currentIndex: 0,
@@ -80,7 +81,7 @@
 
     computed:{
       prevIndex(){
-        if(this.currentIndex == 0) return this.imgSrcs.length - 1;
+        if(this.currentIndex == 0) return this.swiperList.length - 1;
         return this.currentIndex - 1
       }
     },
@@ -92,12 +93,12 @@
     methods:{
 
       propPage(){
-        if(this.currentIndex == 0) return this.currentIndex = this.imgSrcs.length - 1
+        if(this.currentIndex == 0) return this.currentIndex = this.swiperList.length - 1
         this.currentIndex = this.currentIndex - 1;
       },
 
       nextPage(){
-        if(this.currentIndex == this.imgSrcs.length - 1) return this.currentIndex = 0;
+        if(this.currentIndex == this.swiperList.length - 1) return this.currentIndex = 0;
         this.currentIndex = this.currentIndex + 1;
       }
     }
