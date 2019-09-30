@@ -9,7 +9,6 @@ const HtmlWebpackPlugin = require("html-webpack-plugin")
 const CompressionPlugin = require("compression-webpack-plugin")
 const productionConfig = require("./webpack.prod")
 const developmentConfig = require("./webpack.dev")
-const pkg = require('../package.json')
 
 const ROOT_PATH = path.resolve(__dirname, '..')
 const ENTRY_PATH = path.resolve(__dirname, '../src/js/')
@@ -87,7 +86,7 @@ const generateConfig = (isProd, isCompress) => {
       options: {
         loaders: {
           scss: [
-            MiniCssExtractPlugin.loader,
+            // MiniCssExtractPlugin.loader,
             'vue-style-loader',
             'css-loader',
             'postcss-loader',
@@ -112,7 +111,8 @@ const generateConfig = (isProd, isCompress) => {
   ]
 
   let styleLoader = [
-    isProd ? { loader: MiniCssExtractPlugin.loader, options: { publicPath: '../' } } : 'vue-style-loader',
+    // isProd ? { loader: MiniCssExtractPlugin.loader, options: { publicPath: '../' } } : 'vue-style-loader',
+    'vue-style-loader',
     {
       loader: "css-loader",
       options: {
@@ -189,9 +189,10 @@ const generateConfig = (isProd, isCompress) => {
     },
     plugins: [
       new VueLoaderPlugin(),
-      new MiniCssExtractPlugin({
-        filename: isProd ? 'styles/[name]-[hash:5].css' : "styles/[name].css",
-      }),
+      // new MiniCssExtractPlugin({
+      //   filename: isProd ? 'styles/[name]-[hash:5].css' : "styles/[name].css",
+      // }),
+      // new GlgWebpackPlugin(),
       isCompress ? new CompressionPlugin({
         test: new RegExp(/\.(js|css)$/),
         threshold: 10240,
