@@ -52,7 +52,7 @@ body {
 .aboutme-container {
   width: 100vw;
   height: 1386px;
-  background-image: url("../../../../src/images/aboutme-bg.png");
+  background-image: url("../../../../src/images/aboutme-bg.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   position: relative;
