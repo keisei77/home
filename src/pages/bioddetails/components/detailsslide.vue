@@ -26,7 +26,6 @@ export default {
       swiper,
       swiperSlide
   },
-  props:["the_details"],
   data() {
     return {
       swiperOptionTop: {

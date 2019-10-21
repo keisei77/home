@@ -1,13 +1,12 @@
 <template lang='pug'>
     div(class='details_box')
         div(class='details_title')
-            span(class='title_CN' v-text="the_details.content.common") 
-            i(class='title_EN' v-text="the_details.content.latin")
+            span(class='title_CN') 领角鸮
+            i(class='title_EN') Otus bakkamoena
 </template>
 <script>
 export default {
     name: 'Details',
-    props:["the_details"],
     data() {
         return {
             
