@@ -44,6 +44,6 @@ module.exports = {
         path.join(__dirname, "../src/scss/*.css"),
       ])
     }),
-    // new BundleAnalyzerPlugin()
+    new BundleAnalyzerPlugin()
   ]
 }
