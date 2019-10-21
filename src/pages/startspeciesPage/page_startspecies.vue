@@ -10,7 +10,7 @@
       v-on:mouseenter="enter(index)"
       v-on:mouseleave="leave()"
       )
-        div(class="background" :style="{'background-image': `url(${item.n_imgUrl})`}")
+        img(:src="item.n_imgUrl")
         div(v-show="one_shade && index == current" class="pic_one_shade") 
           span(class="titleText") {{item.name}}
           div(class="img_desc") {{item.brief}}
@@ -19,20 +19,20 @@
 </template>
 
 <script>
-import FooterTab from "../components/footer_tab.vue";
-import DetailModals from "./../components/detailModals.vue";
-import * as API from "../../../api";
+import FooterTab from '../components/footer_tab.vue'
+import DetailModals from './../components/detailModals.vue'
+import * as API from '../../../api'
 export default {
   data: () => {
     return {
       allList: [],
-      list_item: "",
+      list_item: '',
       one_shade: true,
       current: null,
-      buttonMsg: "查看更多",
+      buttonMsg: '查看更多',
       isShow: false,
-      b_index: 0
-    };
+      b_index:0
+    }
   },
   components: {
     FooterTab,
@@ -40,23 +40,23 @@ export default {
   },
   methods: {
     enter(index) {
-      this.one_shade = true;
-      this.current = index;
+      this.one_shade = true
+      this.current = index
     },
-    showM: function(index) {
-      this.isShow = !this.isShow;
-      this.list_item = this.allList[index].content;
-      document.querySelector("body").setAttribute("style", "overflow:hidden");
-      console.log(index);
+    showM:function (index) {
+      this.isShow  = !this.isShow;
+      this.list_item = this.allList[index].content
+      document.querySelector('body').setAttribute('style','overflow:hidden')
+      console.log(index)
     },
     leave() {
-      this.one_shade = false;
-      this.current = null;
+      this.one_shade = false
+      this.current = null
     },
     closeM(d) {
-      this.isShow = d;
-      console.log(d);
-      console.log(this.isShow);
+      this.isShow = d
+      console.log(d)
+      console.log(this.isShow)
     }
   },
   mounted() {
@@ -64,17 +64,17 @@ export default {
     this.$_get(API.START_DATA)
       .then(res => {
         //this.allList = res.data;
+        console.log('hello')
         res.data.forEach(item => {
-          var len = item.imgUrl.length;
-          // item.n_imgUrl = item.imgUrl.slice(2, len - 2)
-          item.n_imgUrl = item.imgUrl;
-        });
-        this.allList = res.data;
-        console.log(this.allList);
+          var len = item.imgUrl.length
+          item.n_imgUrl = item.imgUrl.slice(2, len - 2)
+        })
+        this.allList = res.data
+        console.log(this.allList)
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err))
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>
@@ -96,11 +96,6 @@ export default {
   width: 100%;
   height: 100%;
   background: rgba($color: #000000, $alpha: 0.8);
-}
-.background {
-  height: 100%;
-  background-position: 50% 50%;
-  background-size: cover;
 }
 .titleText {
   display: block;
