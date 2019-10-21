@@ -6,22 +6,22 @@
         :class="[!isSearch ? 'fadeInUp' : 'fadeOutUp']"
       )
         li.nav-box-li(:class="{active: currentPage=='index'}")
-          a.link(href="/")
+          a.link(href="http://localhost:8081/")
             span 首页
         li.nav-box-li(:class="{active: currentPage=='starts'}")
-          a.link(href="./startspecies.html")
+          a.link(href="http://localhost:8081/startspecies.html")
             span 高黎贡的明星
         li.nav-box-li(:class="{active: currentPage=='multiformity'}")
-          a.link(href="./biodiversity.html")
+          a.link(href="http://localhost:8081/biodiversity.html")
             span 生物多样性
         li.nav-box-li(:class="{active: currentPage=='presentation'}")
-          a.link(href="./gaoligong.html")
+          a.link(href="http://localhost:8081/gaoligong.html")
             span 高黎贡山介绍
         li.nav-box-li(:class="{active: currentPage=='videos'}")
           a.link(href="https://www.douban.com/group/662229/")
             span 豆瓣小组
         li.nav-box-li(:class="{active: currentPage=='aboutus'}")
-          a.link(href="./aboutme.html")
+          a.link(href="http://localhost:8081/aboutme.html")
             span 关于我们
         li.nav-box-li
           span.link.search(@click="toggleSearchBox") 搜索

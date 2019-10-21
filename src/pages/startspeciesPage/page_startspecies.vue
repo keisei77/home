@@ -1,136 +1,127 @@
 /** 
   明星物种页面
 */
-<template lang="pug" >
+<template lang="pug">
   div
     div(class='box_container')
-      DetailModals(v-show='isShow' :list_item="list_item")
       div(class="pic_box pic_one" 
-      v-for="(item,index) of allList" :key="item.name"
+      v-for="(item,index) of imgList" :key="item.id"
       v-on:mouseenter="enter(index)"
       v-on:mouseleave="leave()"
       )
-        img(:src="item.n_imgUrl")
-        div(v-show="one_shade && index == current" class="pic_one_shade") 
-          span(class="titleText") {{item.name}}
-          div(class="img_desc") {{item.brief}}
-          p(class="button_more" @click='showM(index)') {{buttonMsg}}	  
+        img(:src="item.imgURL")
+        div(v-show="one_shade && index == current" class="pic_one_shade")
+          span(class="titleText") {{item.imgTitle}}
+          div(class="img_desc") {{item.imgMsg}}
+          a(class="button_more" href='#') {{buttonMsg}}
     FooterTab
 </template>
 
 <script>
 import FooterTab from '../components/footer_tab.vue'
-import DetailModals from './../components/detailModals.vue'
-import * as API from '../../../api'
 export default {
   data: () => {
     return {
-      allList: [],
-      list_item: '',
-      one_shade: true,
-      current: null,
-      buttonMsg: '查看更多',
-      isShow: false,
-      b_index:0
+      one_shade:true,
+      current:null,
+      buttonMsg:"查看更多",
+      imgList:[
+        {
+          id:"001",
+          imgURL:"http://w.wfjjt.top/bg2.jpg",
+          imgTitle:"天行长臂猿",
+          imgMsg:"天行长臂猿（学名：Hoolock tianxing）：成年天行长臂猿的体长600-900厘米，后足长140-153厘米，颅全长93-99厘米；体重6-8.5千克。雄性和雌性的体型差别不大，但雄性有长阴毛；对生而短的拇指；弯曲的手指悬挂时可牢固抓握。无尾。前肢明显长于后肢，用来悬挂和在树间荡臂。"
+        },
+        {
+          id:"002",
+          imgURL:"http://w.wfjjt.top/bg2.jpg",
+          imgTitle:"黑猴红臀鹎-高歌",
+          imgMsg:"天行长臂猿（学名：Hoolock tianxing）：成年天行长臂猿的体长600-900厘米，后足长140-153厘米，颅全长93-99厘米；体重6-8.5千克。雄性和雌性的体型差别不大，但雄性有长阴毛；对生而短的拇指；弯曲的手指悬挂时可牢固抓握。无尾。前肢明显长于后肢，用来悬挂和在树间荡臂。"
+        },
+        {
+          id:"003",
+          imgURL:"http://w.wfjjt.top/bg2.jpg",
+          imgTitle:"熊猴",
+          imgMsg:"天行长臂猿（学名：Hoolock tianxing）：成年天行长臂猿的体长600-900厘米，后足长140-153厘米，颅全长93-99厘米；体重6-8.5千克。雄性和雌性的体型差别不大，但雄性有长阴毛；对生而短的拇指；弯曲的手指悬挂时可牢固抓握。无尾。前肢明显长于后肢，用来悬挂和在树间荡臂。"
+        },
+        {
+          id:"004",
+          imgURL:"http://w.wfjjt.top/bg2.jpg",
+          imgTitle:"天行长臂猿",
+          imgMsg:"天行长臂猿（学名：Hoolock tianxing）：成年天行长臂猿的体长600-900厘米，后足长140-153厘米，颅全长93-99厘米；体重6-8.5千克。雄性和雌性的体型差别不大，但雄性有长阴毛；对生而短的拇指；弯曲的手指悬挂时可牢固抓握。无尾。前肢明显长于后肢，用来悬挂和在树间荡臂。"
+        }
+      ]
     }
   },
-  components: {
-    FooterTab,
-    DetailModals
-  },
-  methods: {
-    enter(index) {
-      this.one_shade = true
-      this.current = index
+  components:{
+    FooterTab
     },
-    showM:function (index) {
-      this.isShow  = !this.isShow;
-      this.list_item = this.allList[index].content
-      document.querySelector('body').setAttribute('style','overflow:hidden')
-      console.log(index)
+  methods:{
+    enter(index){
+      this.one_shade = true;
+      this.current = index;
     },
-    leave() {
-      this.one_shade = false
-      this.current = null
-    },
-    closeM(d) {
-      this.isShow = d
-      console.log(d)
-      console.log(this.isShow)
+    leave(){
+      this.one_shade = false;
+      this.current = null;
     }
-  },
-  mounted() {
-    //明星物种请求
-    this.$_get(API.START_DATA)
-      .then(res => {
-        //this.allList = res.data;
-        console.log('hello')
-        res.data.forEach(item => {
-          var len = item.imgUrl.length
-          item.n_imgUrl = item.imgUrl.slice(2, len - 2)
-        })
-        this.allList = res.data
-        console.log(this.allList)
-      })
-      .catch(err => console.log(err))
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.box_container {
-  width: 100%;
-  height: 1080px;
-  display: flex;
-}
-.pic_box {
-  flex: 1;
-}
-.pic_one {
-  position: relative;
-}
-.pic_one > .pic_one_shade {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba($color: #000000, $alpha: 0.8);
-}
-.titleText {
-  display: block;
-  font-family: PingFangSC-Semibold;
-  font-size: 40px;
-  color: #ffffff;
-  height: 56px;
-  line-height: 56px;
-  text-align: center;
-  margin-top: 340px;
-  margin-bottom: 80px;
-}
-.img_desc {
-  width: 360px;
-  height: 192px;
-  font-family: PingFangSC-Regular;
-  font-size: 14px;
-  color: #9d9e9c;
-  line-height: 24px;
-  margin: 0 auto;
-  line-height: 24px;
-  margin-bottom: 60px;
-}
-.button_more {
-  display: block;
-  width: 104px;
-  height: 33px;
-  margin: 0 auto;
-  text-decoration: none;
-  background: #46787d;
-  font-family: PingFangSC-Regular;
-  font-size: 12px;
-  color: #ffffff;
-  line-height: 33px;
-  text-align: center;
-  cursor: pointer;
-}
+  .box_container{
+    width:100%;
+    height:1080px;
+    display: flex;
+  }
+  .pic_box{
+    flex:1; 
+  }
+  .pic_one{
+    position:relative;
+  }
+  .pic_one > .pic_one_shade{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba($color: #000000, $alpha: .8);
+  }
+  .titleText{
+    display: block;
+    font-family: PingFangSC-Semibold;
+    font-size: 40px;
+    color: #FFFFFF;
+    height:56px;
+    line-height:56px;
+    text-align:center;
+    margin-top:340px;
+    margin-bottom:80px;
+  }
+  .img_desc{
+    width:360px;
+    height:192px;
+    font-family: PingFangSC-Regular;
+    font-size: 14px;
+    color: #9D9E9C;
+    line-height: 24px;
+    margin:0 auto;
+    line-height: 24px;
+    margin-bottom:60px;
+  }
+  .button_more{
+    display:block;
+    width:104px;
+    height:33px;
+    margin:0 auto;
+    text-decoration:none;
+    background:#46787D;
+    font-family:PingFangSC-Regular;
+    font-size:12px;
+    color: #FFFFFF;
+    line-height:33px;
+    text-align:center;
+  }
 </style>
