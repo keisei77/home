@@ -61,6 +61,8 @@ export default {
 
 <style lang="scss" scoped>
 .common-header{
+  background-color: rgba(70,120,125,.5);
+  
   width: 100%;
   height: 60px;
   display: flex;
