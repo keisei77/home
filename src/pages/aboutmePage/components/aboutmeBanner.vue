@@ -86,10 +86,10 @@ body {
 	& > .title-logo{
 		position: absolute;
 		left: 45%;
-		top: 31%;
+		top: 22%;
 		color: #fff;
 		transform: rotate(33deg);
-        margin-left: 30px;
+        margin-left: 10%;
 		& > span{
 			display: inline-block;
 			font-size: 40px;
