@@ -89,9 +89,10 @@ body {
 		top: 31%;
 		color: #fff;
 		transform: rotate(33deg);
+        margin-left: 30px;
 		& > span{
 			display: inline-block;
-			font-size: 65px;
+			font-size: 40px;
 			vertical-align: middle;
 			margin-right: 30px;
 		}
@@ -101,7 +102,7 @@ body {
 			vertical-align: middle;
 		}
 		& > .desc-content{
-			font-size: 35px;
+			font-size: 23px;
 			margin-top: 50px;
 			line-height: 70px;
 		}
@@ -131,9 +132,10 @@ body {
 		color: #fff;
 		transform: rotate(33deg);
 		width: 800px;
+        margin-right: 30px;
 		& > span{
 			display: block;
-			font-size: 65px;
+			font-size: 40px;
 			width: 500px;
 			position: relative;
 			left: 150px;
@@ -148,7 +150,7 @@ body {
 			top: 50px;
 		}
 		& > .desc-content{
-			font-size: 35px;
+			font-size: 23px;
 			margin-top: 50px;
 			line-height: 70px;
 		}
