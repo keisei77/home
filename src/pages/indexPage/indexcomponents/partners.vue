@@ -3,9 +3,18 @@
 	div(class='partners_box')
 		div(class='partners_title')
 			div(class='partners_title_box')
-				div(class="CH_title") 合作伙伴
-					p(class="EN_title") 
+				div(class="CH_title") 主办方
+					p(class="EN_title")
 						i PARTNERS
+		div(class='partners_group')
+			div(class='partners_list' v-for='item of organizer')
+				a(:href='item.link')
+					img(class='partners_list_img' :src='item.imgUrl' :alt='item.description')
+		div(class='partners_title')
+			div(class='partners_title_box')
+				div(class="CH_title") 支持单位
+					p(class="EN_title")
+						i SUPPORT
 		div(class='partners_group')
 			div(class='partners_list' v-for='partners of partners_data')
 				a(:href='partners.link')
@@ -16,7 +25,7 @@
 import FooterTab from '../../components/footer_tab.vue'
 export default {
 	name: 'partner',
-	props: ['partners_data'],
+	props: ['partners_data','organizer'],
 	components:{
 		FooterTab
 	}
@@ -25,7 +34,9 @@ export default {
 <style lang="scss" scoped>
 	.partners_box{
 		width: 100%;
-		height: 549px;
+		height: calc(100vh - 90px);
+    padding-top: 90px;
+    box-sizing: border-box;
 	}
 	.partners_title{
 		width: 100%;
@@ -60,19 +71,21 @@ export default {
 	}
 	.partners_group{
 		width: 1200px;
-		height: 276px;
 		margin: 0 auto;
 		display: flex;
 		flex-wrap: wrap;
+    justify-content: center;
 		overflow: hidden;
 		position: relative;
-		margin-bottom: 127px;
 	}
 	.partners_list{
-		width: 338px;
 		height: 118px;
 		margin-bottom: 40px;
-	}  
+    & img{
+      max-width: 300px;
+      max-height: 100px;
+    }
+	}
 	.partners_list:nth-child(1),.partners_list:nth-child(4){
 		margin-right: 47px;
 	}
@@ -80,14 +93,14 @@ export default {
 		margin-right: 94px;
 		margin-left: 47px;
 	}
-	.partners_list:nth-child(3){
-		position:absolute;
-		top: 0;
-		right:0;
-	} 
-	.partners_list:nth-child(6) {
-		position:absolute;
-		top: 158px;
-		right:0;
-	 }
+	/*.partners_list:nth-child(3){*/
+		/*position:absolute;*/
+		/*top: 0;*/
+		/*right:0;*/
+	/*}*/
+	/*.partners_list:nth-child(6) {*/
+		/*position:absolute;*/
+		/*top: 158px;*/
+		/*right:0;*/
+	 /*}*/
 </style>

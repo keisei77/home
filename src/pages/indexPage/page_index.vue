@@ -9,12 +9,12 @@
 				li.point(:class="{active : this.currentIndex == 3}")
 		div.index(:style="indexStyle")
 			IndexSwiper.index-section(:style="sectionStyle" :swiperList='swiperList')
-			FlagshipSpecies.index-section(:style="sectionStyle" :start_list = 'start_list' 
+			FlagshipSpecies.index-section(:style="sectionStyle" :start_list = 'start_list'
 			:bgImage = 'bgImage' v-on:child-open='c_open')
 			LatestNews.index-section(:style="sectionStyle" :news_data='news_data' :totalPages='Math.ceil(news_data.total / 2)' :current-page='currentPage' @pagechanged='handleChange')
-			PartNers.index-section(:style="sectionStyle" :partners_data='partners_data')
-			
-		
+			PartNers.index-section(:style="sectionStyle" :partners_data='partners_data' :organizer="organizer")
+
+
 </template>
 <script>
 import FlagshipSpecies from './indexcomponents/flagship_species.vue'
@@ -69,7 +69,9 @@ export default {
       currentPage: 1,
       bgImage: '',
 	    isShow:'',
-      swiperList:[]
+      swiperList:[],
+      baseImgUrl : 'http://www.wildgaoligong.com/',
+      organizer :{},//主办方
     }
   },
   methods: {
@@ -113,28 +115,56 @@ export default {
     //轮播图请求
     this.$_get(API.ROLLIMAGES).then(
       res => {
+        console.log(res.data);
+        for(let value of res.data){
+          value.imgUrl = this.baseImgUrl + value.imgUrl;
+        }
         this.swiperList = res.data
       }
     ).catch(err => console.log(err))
     //明星物种请求
     this.$_get(API.START_DATA)
       .then(res => {
+        for(let value of res.data){
+          value.imgUrl = this.baseImgUrl + value.imgUrl;
+        }
         this.start_list = res.data[0]
         var len = this.start_list.imgUrl.length
-        this.bgImage = this.start_list.imgUrl.slice(2, len - 2)
+        // this.bgImage = this.start_list.imgUrl.slice(2, len - 2);
+        this.bgImage = this.start_list.imgUrl;
       })
       .catch(err => console.log(err))
     //合作伙伴请求
     this.$_get(API.PARTNERS_DATA)
       .then(res => {
+        for(let value of res.data){
+          value.imgUrl = this.baseImgUrl + value.imgUrl;
+        }
         this.partners_data = res.data
       })
       .catch(err => {
         console.log(err)
       })
+    //主板方请求
+    this.$_get(API.SPONSORLIST)
+      .then(res => {
+        for(let value of res.data){
+          value.imgUrl = this.baseImgUrl + value.imgUrl;
+        }
+        this.organizer = res.data
+      })
+      .catch(err => {
+        console.log(err)
+      })
+
     //新闻列表请求
     this.$_get(API.TEST_DATA)
       .then(res => {
+        for(let value of res.data.dateList){
+          try {
+            value.thumbnail = this.baseImgUrl +  JSON.parse(value.thumbnail)[0]
+          }catch (e) {console.error(e) };
+        }
         this.news_data = res.data
       })
       .catch(err => console.log(err))
