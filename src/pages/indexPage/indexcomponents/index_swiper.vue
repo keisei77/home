@@ -1,5 +1,5 @@
 <template lang='pug'>
-  .container 
+  .container
     .banner-box
       .swiper-point
         ul
@@ -12,9 +12,9 @@
           .swiper-box-item-bg(
             :style="{ backgroundImage: `url(${item.imgUrl})` }"
           )
-          .swiper-box-item-mirror(
-            :style="{ backgroundImage: `url(${item.imgUrl})` }"
-          )
+          <!--.swiper-box-item-mirror(-->
+            <!--:style="{ backgroundImage: `url(${item.imgUrl})` }"-->
+          <!--)-->
       .info-box
         .info-box-item.animated.slow(
           v-for="(item, index) of swiperList"
@@ -25,17 +25,17 @@
           .info-box-item-sub {{item.shortContent}}
           .info-box-item-link
             a(:href="item.imgLink") 查看更多 >
-      .control-box
-        .control-info-box
-          .control-info-box-item.animated.slow(
-            v-for="(item, index) of swiperList"
-            :class="[index == currentIndex ? 'fadeIn' : 'fadeOut', index == currentIndex ? 'delay-2s' : '']"
-          )
-            .control-info-box-item-tit {{item.title}}
-            .control-info-box-item-sub {{item.content}}
-        .btn-box
-          button(@click="propPage()") <
-          button(@click="nextPage()") >
+      <!--.control-box-->
+        <!--.control-info-box-->
+          <!--.control-info-box-item.animated.slow(-->
+            <!--v-for="(item, index) of swiperList"-->
+            <!--:class="[index == currentIndex ? 'fadeIn' : 'fadeOut', index == currentIndex ? 'delay-2s' : '']"-->
+          <!--)-->
+            <!--.control-info-box-item-tit {{item.title}}-->
+            <!--.control-info-box-item-sub {{item.content}}-->
+        <!--.btn-box-->
+          <!--button(@click="propPage()") <-->
+          <!--button(@click="nextPage()") >-->
 </template>
 
 <script>
@@ -87,7 +87,7 @@
     },
 
     mounted () {
-      
+
     },
 
     methods:{
