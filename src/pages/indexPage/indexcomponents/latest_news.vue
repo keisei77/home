@@ -1,10 +1,10 @@
 <template lang='pug'>
 	.container
 		div(class='news_box')
-			div(class='news_title') 
+			div(class='news_title')
 				div(class='news_title_box')
 					div(class="CH_title") 新闻动态
-						p(class="EN_title") 
+						p(class="EN_title")
 							i LATEST NEWS
 			div(class='news_group')
 				div(class='news_list' v-for='news of tempNews' :key='news.id')
@@ -14,7 +14,7 @@
 						div(class='news_list_title')
 							span(class='news_list_title_h') {{news.title}}
 							span(class='news_list_title_t') {{news.time}}
-						div(class='news_list_msg') 
+						div(class='news_list_msg')
 							p  {{news.brief}}
 						a(class='news_list_btn' :href='news.link') 查看更多 >>
 			<ul class="pagination">
@@ -40,7 +40,7 @@
 				//- 		div(class='news_list_title')
 				//- 			span(class='news_list_title_h') 新闻动态标题标题标题
 				//- 			span(class='news_list_title_t') 2019-03-11 23:23
-				//- 		div(class='news_list_msg') 
+				//- 		div(class='news_list_msg')
 				//- 			p  天行长臂猿（学名：Hoolock tianxing）：成年天行长臂猿的体长600-900厘米，后足长140-153厘米，颅全长93-99厘米；体重6-8.5千克。雄性和雌性的体型差别不大，但雄性有长阴毛；对生而短的拇指；弯曲的手指悬挂时可牢固抓握。无尾。前肢明显长于后肢，用来悬挂和在树间荡臂。
 				//- 		a(class='news_list_btn' href='#') 查看更多 >>
 
@@ -77,7 +77,7 @@ export default {
 		}
 	},
 	computed: {
-		
+
 		isPrev:function () {
 			return this.currentPage === 1
 		},
@@ -86,12 +86,13 @@ export default {
 		},
 
 		startPage: function () {
-			if (this.currentPage === 1) {
+			if (this.currentPage <= 1) {
 				return 1
-			}
-			if (this.currentPage === this.totalPages) {
-				return this.totalPages - this.maxVisibleButtons + 1
-			}
+			};
+			// if (this.currentPage === this.totalPages) {
+      //   console.log(this.currentPage,this.totalPages,this.maxVisibleButtons)
+			// 	return this.totalPages - this.maxVisibleButtons + 1
+			// };
 			return this.currentPage - 1
 		},
 		endPage: function () {
@@ -120,7 +121,7 @@ export default {
 					return this.partNersNews.slice((this.currentPage - 1) * 2,this.currentPage * 2)
 				}
 			}
-			
+
 		}
 	},
 	methods: {
@@ -151,7 +152,7 @@ export default {
 			return this.currentPage === page;
 		}
   }
-	  
+
 
 }
 </script>
@@ -215,7 +216,7 @@ export default {
 				img{
 					width:100%;
 					height:100%;
-				}		
+				}
 		}
 		.news_list_info{
 				width: 806px;

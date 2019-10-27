@@ -119,7 +119,7 @@ export default {
         for(let value of res.data){
           value.imgUrl = this.baseImgUrl + value.imgUrl;
         }
-        this.swiperList = res.data
+        this.swiperList = res.data.splice(0,5);
       }
     ).catch(err => console.log(err))
     //明星物种请求

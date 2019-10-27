@@ -3,8 +3,8 @@
     .banner-box
       .swiper-point
         ul
-          li(v-for="(item, index) of swiperList" :class="{active : index == currentIndex}")
-      .swiper-box
+          li(v-for="(item, index) of swiperList" :class="{active : index == currentIndex}" @click="changePage(index)")
+      .swiper-box( v-show="swiperShow" )
         .swiper-box-item(
           v-for="(item, index) of swiperList"
           :class="{current: currentIndex == index, prev: prevIndex == index}"
@@ -16,8 +16,13 @@
             <!--:style="{ backgroundImage: `url(${item.imgUrl})` }"-->
           <!--)-->
       .info-box
+        <!--.info-box-item.animated.slow(-->
+          <!--v-for="(item, index) of swiperList"-->
+          <!--:class="[index == currentIndex ? 'fadeIn' : 'fadeOut', index == currentIndex ? 'delay-2s' : '']"-->
+        <!--)-->
         .info-box-item.animated.slow(
           v-for="(item, index) of swiperList"
+          v-show="index == currentIndex"
           :class="[index == currentIndex ? 'fadeIn' : 'fadeOut', index == currentIndex ? 'delay-2s' : '']"
         )
           .info-box-item-tit {{item.title}}
@@ -44,6 +49,7 @@
     props:['swiperList'],
     data () {
       return {
+        swiperShow : false,
         currentIndex: 0,
         responseData: [
           {
@@ -81,17 +87,25 @@
 
     computed:{
       prevIndex(){
+
         if(this.currentIndex == 0) return this.swiperList.length - 1;
         return this.currentIndex - 1
       }
     },
 
     mounted () {
-
+      setTimeout(()=>{
+        this.swiperShow = true;
+      },300)
+      setInterval(()=>{
+        this.nextPage();
+      },5000)
     },
 
     methods:{
-
+      changePage(index){
+        this.currentIndex = index;
+      },
       propPage(){
         if(this.currentIndex == 0) return this.currentIndex = this.swiperList.length - 1
         this.currentIndex = this.currentIndex - 1;
