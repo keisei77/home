@@ -65,9 +65,15 @@ export default {
       .then(res => {
         //this.allList = res.data;
         res.data.forEach(item => {
-          var len = item.imgUrl.length;
+          // var len = item.imgUrl.length;
           // item.n_imgUrl = item.imgUrl.slice(2, len - 2)
-          item.n_imgUrl = item.imgUrl;
+          let thumbnail = item.thumbnail;
+          let imgUrl = /\["(\S+)"\]/i.exec(thumbnail);
+          if (imgUrl) {
+            item.n_imgUrl = imgUrl[1];
+          } else {
+            item.n_imgUrl = item.imgUrl;
+          }
         });
         this.allList = res.data;
         console.log(this.allList);
