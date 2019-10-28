@@ -1,6 +1,6 @@
 <template lang="pug">
 	.warp
-		DetailModal(v-show='isShow' v-on:child-close='c_close' :start_list="start_list")
+		DetailModal(v-if='isShow' v-on:child-close='c_close' :start_list="start_list[curStarAnimalsIndex]")
 		.page-thumes
 			ul
 				li.point(:class="{active : this.currentIndex == 0}")
@@ -13,7 +13,6 @@
 			:bgImage = 'bgImage' v-on:child-open='c_open')
 			LatestNews.index-section(:style="sectionStyle" :news_data='news_data' :totalPages='Math.ceil(news_data.total / 2)' :current-page='currentPage' @pagechanged='handleChange')
 			PartNers.index-section(:style="sectionStyle" :partners_data='partners_data' :organizer="organizer")
-
 
 </template>
 <script>
@@ -72,6 +71,7 @@ export default {
       swiperList:[],
       baseImgUrl : 'http://www.wildgaoligong.com/',
       organizer :{},//主办方
+			curStarAnimalsIndex : 0
     }
   },
   methods: {
@@ -79,7 +79,8 @@ export default {
 		this.isShow = d;
 	},
 	c_open(d){
-	    this.isShow = d;
+	    this.isShow = d.isShow;
+	    this.curStarAnimalsIndex = d.index;
 	},
     getScrollDelta(e) {
       e = e || window.event
@@ -126,12 +127,12 @@ export default {
     this.$_get(API.START_DATA)
       .then(res => {
         for(let value of res.data){
-          value.imgUrl = this.baseImgUrl + value.imgUrl;
+          value.imgUrl = this.baseImgUrl + value.imgUrl.split('","')[0];
         }
-        this.start_list = res.data[0]
-        var len = this.start_list.imgUrl.length
+        this.start_list = res.data;
+        // var len = this.start_list.imgUrl.length
         // this.bgImage = this.start_list.imgUrl.slice(2, len - 2);
-        this.bgImage = this.start_list.imgUrl;
+        // this.bgImage = this.start_list.imgUrl;
       })
       .catch(err => console.log(err))
     //合作伙伴请求

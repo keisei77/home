@@ -4,33 +4,62 @@
 		div(class='start_title')
 			div(class='title_box')
 				div(class="CH_title") 明星物种
-					p(class="EN_title") 
+					p(class="EN_title")
 						i FLAGSHIP SPECIES
-		div(:class='{start_img:1}' :style="{background:'url('+ bgImage +')'}")
-			div(class='start_info')
-				div(class='start_info_box')
-					p(class='start_info_title' v-text='start_list.name') 
-					p(class='start_info_msg' v-text='start_list.brief') 
-					p(class='start_info_btn'  @click='show') 查看更多 >>     
-  
+		swiper(:options="swiperOption" ref="mySwiper")
+			swiperSlide(v-for="(slide, index) in start_list" :key="index")
+				div(:class='{start_img:1}' :style="{background:'url('+ slide.imgUrl +')'}")
+					div(class='start_info')
+						div(class='start_info_box')
+							p(class='start_info_title' v-text='slide.name')
+							p(class='start_info_msg' v-text='slide.brief')
+							p(class='start_info_btn'  @click='show(index)') 查看更多 >>
+			div(class="swiper-pagination" slot="pagination")
+			div(class="swiper-button-prev" slot="button-prev")
+			div(class="swiper-button-next" slot="button-next")
+			div(class="swiper-pagination" slot="scrollbar")
 </template>
 <script>
-export default {
-  name: 'flagshipspecies',
-  props: ['start_list', 'bgImage'],
-  data() {
-    return {
-      isShow: true
-    }
-  },
-  methods: {
-    show: function() {
-      this.$emit('child-open', this.isShow)
-      document.querySelector('body').setAttribute('style','overflow:hidden')
-    }
-  }
-}
+	import 'swiper/dist/css/swiper.css'
+	import { swiper, swiperSlide } from 'vue-awesome-swiper'
+	export default {
+		name: 'flagshipspecies',
+		props: ['start_list', 'bgImage'],
+		components: {
+			swiper:swiper,
+			swiperSlide:swiperSlide
+		},
+		data() {
+			return {
+				isShow: true,
+				swiperOption:{
+					pagination: {
+						el: '.swiper-pagination',
+					},
+					scrollbar: {
+						el: '.swiper-scrollbar',
+					},
+					navigation: {
+						nextEl: '.swiper-button-next',
+						prevEl: '.swiper-button-prev',
+					},
+				}
+			}
+		},
+		methods: {
+			show: function(index) {
+				this.$emit('child-open', {index,isShow:this.isShow})
+				document.querySelector('body').setAttribute('style','overflow:hidden')
+			}
+		}
+	}
 </script>
+<style>
+	.swiper-container{
+		--swiper-navigation-color: #00ff33;/* 单独设置按钮颜色 */
+		--swiper-navigation-size: 30px;/* 设置按钮大小 */
+	}
+</style>
 <style lang="scss" scoped>
 .container {
   width: 100%;
