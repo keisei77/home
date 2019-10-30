@@ -12,7 +12,7 @@
 			FlagshipSpecies.index-section(:style="sectionStyle" :start_list = 'start_list'
 			:bgImage = 'bgImage' v-on:child-open='c_open')
 			LatestNews.index-section(:style="sectionStyle" :news_data='news_data' :totalPages='Math.ceil(news_data.total / 2)' :current-page='currentPage' @pagechanged='handleChange')
-			PartNers.index-section(:style="sectionStyle" :partners_data='partners_data' :organizer="organizer")
+			PartNers.index-section(:style="sectionStyle" :partners_data='partners_data' :organizer="organizer" :photographer="photographer")
 
 </template>
 <script>
@@ -71,7 +71,8 @@ export default {
       swiperList:[],
       baseImgUrl : 'http://www.wildgaoligong.com/',
       organizer :{},//主办方
-			curStarAnimalsIndex : 0
+			curStarAnimalsIndex : 0,
+			photographer:[]
     }
   },
   methods: {
@@ -167,6 +168,11 @@ export default {
           }catch (e) {console.error(e) };
         }
         this.news_data = res.data
+      })
+      .catch(err => console.log(err))
+    //摄影师列表请求
+    this.$_get(API.QUERYCONTENTS)
+      .then(res => {this.photographer = res.data;
       })
       .catch(err => console.log(err))
   }
