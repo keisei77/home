@@ -217,7 +217,7 @@
       }
       .info-box{
         z-index: 200;
-        width: 32.1%;
+        width: 45%;
         height: 47.7%;
         position: absolute;
         overflow: hidden;

@@ -19,13 +19,15 @@
 			div(class='partners_list' v-for='partners of partners_data')
 				a(:href='partners.link')
 					img(class='partners_list_img' :src='partners.imgUrl' :alt='partners.description')
+		div(class="photographer_list") 感谢以下摄影师为本网站无偿提供的高质量图片：
+			span(v-for='item of photographer' v-text="item.title")
 	footer-tab
 </template>
 <script>
 import FooterTab from '../../components/footer_tab.vue'
 export default {
 	name: 'partner',
-	props: ['partners_data','organizer'],
+	props: ['partners_data','organizer','photographer'],
 	components:{
 		FooterTab
 	}
@@ -35,7 +37,7 @@ export default {
 	.partners_box{
 		width: 100%;
 		height: calc(100vh - 90px);
-    padding-top: 90px;
+    padding-top: 70px;
     box-sizing: border-box;
 	}
 	.partners_title{
@@ -80,7 +82,7 @@ export default {
 	}
 	.partners_list{
 		height: 118px;
-		margin-bottom: 40px;
+		margin-bottom: 30px;
     & img{
       max-width: 300px;
       max-height: 100px;
@@ -92,6 +94,19 @@ export default {
 	.partners_list:nth-child(2),.partners_list:nth-child(5){
 		margin-right: 94px;
 		margin-left: 47px;
+	}
+	.photographer_list{
+		font-family: PingFangSC-Semibold;
+		text-align: center;
+		font-size: 18px;
+		max-width: 1100px;
+		margin: 0 auto;
+		margin-top: -20px;
+		color: #2d2f29;
+		span{
+			margin-left: 15px;
+
+		}
 	}
 	/*.partners_list:nth-child(3){*/
 		/*position:absolute;*/
