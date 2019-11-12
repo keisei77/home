@@ -1,13 +1,7 @@
 <template lang="pug">
 	.warp
 		DetailModal(v-if='isShow' v-on:child-close='c_close' :start_list="start_list[curStarAnimalsIndex]")
-		.page-thumes
-			ul
-				li.point(:class="{active : this.currentIndex == 0}")
-				li.point(:class="{active : this.currentIndex == 1}")
-				li.point(:class="{active : this.currentIndex == 2}")
-				li.point(:class="{active : this.currentIndex == 3}")
-		div.index(:style="indexStyle")
+		div.index
 			IndexSwiper.index-section(:style="sectionStyle" :swiperList='swiperList')
 			FlagshipSpecies.index-section(:style="sectionStyle" :start_list = 'start_list'
 			:bgImage = 'bgImage' v-on:child-open='c_open')
@@ -30,22 +24,30 @@ export default {
     FlagshipSpecies,
     LatestNews,
     PartNers,
-	DetailModal
+		DetailModal
   },
 
   computed: {
-    getViewPortHeight() {
-      return document.documentElement.clientHeight || document.body.clientHeight
-    },
+    // getViewPortHeight() {
+    //   return document.documentElement.clientHeight || document.body.clientHeight
+    // },
 
-    indexStyle() {
-      return {
-        transform: `translateY(-${this.currentIndex *
-          this.getViewPortHeight}px)`
-      }
-    },
+    // indexStyle() {
+    //   return {
+    //     transform: `translateY(-${this.currentIndex *
+    //       this.getViewPortHeight}px)`
+    //   }
+    // },
 
     sectionStyle() {
+    	console.log({
+				height:
+					document.documentElement.clientHeight + 'px' ||
+					document.body.clientHeight + 'px',
+				width:
+					document.documentElement.clientWidth + 'px' ||
+					document.body.clientWidth + 'px'
+			})
       return {
         height:
           document.documentElement.clientHeight + 'px' ||
@@ -92,28 +94,28 @@ export default {
       }
     },
 
-    handleScroll(e) {
-      let now = +new Date()
-      if (now - this.scrollTime > this.scrollDaly) {
-        this.scrollTime = now
-        this.getScrollDelta(e)
-          ? this.currentIndex == 0
-            ? (this.currentIndex = 0)
-            : this.currentIndex--
-          : this.currentIndex == 3
-            ? (this.currentIndex = 3)
-            : this.currentIndex++
-      } else {
-        return false
-      }
-    },
+    // handleScroll(e) {
+    //   let now = +new Date()
+    //   if (now - this.scrollTime > this.scrollDaly) {
+    //     this.scrollTime = now
+    //     this.getScrollDelta(e)
+    //       ? this.currentIndex == 0
+    //         ? (this.currentIndex = 0)
+    //         : this.currentIndex--
+    //       : this.currentIndex == 3
+    //         ? (this.currentIndex = 3)
+    //         : this.currentIndex++
+    //   } else {
+    //     return false
+    //   }
+    // },
     handleChange: function(page) {
       this.currentPage = page
     }
   },
   mounted() {
-    console.log(this.getViewPortHeight)
-    window.addEventListener('mousewheel', this.handleScroll, false)
+    // console.log(this.getViewPortHeight)
+    // window.addEventListener('mousewheel', this.handleScroll, false)
     //轮播图请求
     this.$_get(API.ROLLIMAGES).then(
       res => {
@@ -181,31 +183,13 @@ export default {
 
 <style lang="scss" scoped>
 .warp {
-  .page-thumes {
-    z-index: 200;
-    position: fixed;
-    right: 1%;
-    top: 40%;
-    ul {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      height: 100px;
-      width: 10px;
-      .point {
-        width: 5px;
-        height: 5px;
-        background-color: #c5cbce;
-        border-radius: 5px;
-      }
-      .point.active {
-        box-shadow: 0px 0px 2px 4px #8b9695;
-      }
-    }
-  }
   .index {
-    overflow: hidden;
-    transition: all 500ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    /*overflow: hidden;*/
+    /*transition: all 500ms cubic-bezier(0.25, 0.46, 0.45, 0.94);*/
+		height: 100vh;
+		width: 100%;
+		overflow-y: auto;
+		overflow-x: hidden;
   }
 }
 </style>
