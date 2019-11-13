@@ -167,17 +167,18 @@ export default {
 		}
 		.news_title{
 				width: 100%;
-				height: 293px;
+				height: 220px;
 		}
 		.news_title_box{
 				width: 1000px;
 				position: relative;
-				height: 293px;
+				height: 200px;
 				margin: 0 auto;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
 		}
 		.CH_title{
-				position: absolute;
-				top:131px;
 				width: 100%;
 				height: 56px;
 				text-align: center;

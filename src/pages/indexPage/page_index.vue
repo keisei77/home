@@ -5,9 +5,8 @@
 			IndexSwiper.index-section(:style="sectionStyle" :swiperList='swiperList')
 			FlagshipSpecies.index-section(:style="sectionStyle" :start_list = 'start_list'
 			:bgImage = 'bgImage' v-on:child-open='c_open')
-			LatestNews.index-section(:style="sectionStyle" :news_data='news_data' :totalPages='Math.ceil(news_data.total / 2)' :current-page='currentPage' @pagechanged='handleChange')
-			PartNers.index-section(:style="sectionStyle" :partners_data='partners_data' :organizer="organizer" :photographer="photographer")
-
+			LatestNews.index-section(:style="{'height':'950px'}" :news_data='news_data' :totalPages='Math.ceil(news_data.total / 2)' :current-page='currentPage' @pagechanged='handleChange')
+			PartNers.index-section(:style="{'height':'900px'}" :partners_data='partners_data' :organizer="organizer" :photographer="photographer")
 </template>
 <script>
 import FlagshipSpecies from './indexcomponents/flagship_species.vue'
@@ -41,17 +40,13 @@ export default {
 
     sectionStyle() {
     	console.log({
-				height:
-					document.documentElement.clientHeight + 'px' ||
-					document.body.clientHeight + 'px',
+				height:'800px',
 				width:
 					document.documentElement.clientWidth + 'px' ||
 					document.body.clientWidth + 'px'
 			})
       return {
-        height:
-          document.documentElement.clientHeight + 'px' ||
-          document.body.clientHeight + 'px',
+        height:'700px',
         width:
           document.documentElement.clientWidth + 'px' ||
           document.body.clientWidth + 'px'
