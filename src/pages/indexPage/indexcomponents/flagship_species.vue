@@ -59,6 +59,12 @@
 		--swiper-navigation-color: #00ff33;/* 单独设置按钮颜色 */
 		--swiper-navigation-size: 30px;/* 设置按钮大小 */
 	}
+	.swiper-button-prev, .swiper-container-rtl .swiper-button-next{
+		left: 30px;
+	}
+	.swiper-button-next, .swiper-container-rtl .swiper-button-prev{
+		right: 30px;
+	}
 </style>
 <style lang="scss" scoped>
 .container {
@@ -70,22 +76,21 @@
   }
   .start_title {
     width: 100%;
-    height: 264px;
+    height: 200px;
   }
   .title_box {
     width: 1000px;
     position: relative;
-    height: 264px;
+    height: 200px;
     margin: 0 auto;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
   }
   .CH_title {
-    position: absolute;
-    top: 111px;
-
     width: 100%;
     height: 56px;
     text-align: center;
-    line-height: 56px;
     font-family: PingFangSC-Semibold;
     font-size: 40px;
     color: #2d2f29;
@@ -104,7 +109,7 @@
   .start_img {
     position: relative;
     width: 100%;
-    height: 654px;
+    height: 500px;
   }
   .start_info {
     position: absolute;
