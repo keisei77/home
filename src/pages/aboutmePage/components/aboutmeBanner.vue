@@ -26,22 +26,22 @@
 </template>
 <script>
 export default {
-	name: "aboutmePage",
-	props:['content'],
+  name: "aboutmePage",
+  props: ["content"],
   data() {
     return {
-			hiddenLeftSlideStatus: false,
-			hiddenRightSlideStatus: false
-		};
+      hiddenLeftSlideStatus: false,
+      hiddenRightSlideStatus: false
+    };
   },
-	methods: {
-		overLeftSlide() {
-			this.hiddenLeftSlideStatus = !this.hiddenLeftSlideStatus
-		},
-		overRightSlide() {
-			this.hiddenRightSlideStatus = !this.hiddenRightSlideStatus
-		}
-	}
+  methods: {
+    overLeftSlide() {
+      this.hiddenLeftSlideStatus = !this.hiddenLeftSlideStatus;
+    },
+    overRightSlide() {
+      this.hiddenRightSlideStatus = !this.hiddenRightSlideStatus;
+    }
+  }
 };
 </script>
 
@@ -51,29 +51,30 @@ body {
 }
 .aboutme-container {
   width: 100vw;
-  height: 1386px;
+  height: 100vh;
   background-image: url("../../../../src/images/aboutme-bg.jpg");
   background-size: cover;
   background-repeat: no-repeat;
+  background-position: center;
   position: relative;
   overflow: hidden;
 }
-.section-modal{
-	position: absolute;
-	top: 0;
-	width: 50vw;
-	height: 100%;
-	background-color: rgba(0, 0, 0, 0);
-	z-index: 3;
+.section-modal {
+  position: absolute;
+  top: 0;
+  width: 50vw;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0);
+  z-index: 3;
 }
-.section-left-modal{
-	left: 0;
+.section-left-modal {
+  left: 0;
 }
-.section-right-modal{
-	right: 0;
+.section-right-modal {
+  right: 0;
 }
 .section-left {
-	z-index: 2;
+  z-index: 2;
   position: absolute;
   width: 100%;
   height: 200%;
@@ -82,40 +83,40 @@ body {
   top: -40px;
   left: -111%;
   transform: rotate(-33deg);
-	transition: left 0.3s ease-in-out;
-	& > .title-logo{
-		position: absolute;
-		left: 45%;
-		top: 22%;
-		color: #fff;
-		transform: rotate(33deg);
-        margin-left: 10%;
-		& > span{
-			display: inline-block;
-			font-size: 40px;
-			vertical-align: middle;
-			margin-right: 30px;
-		}
-		& > img{
-			width: 235px;
-			height: 89px;
-			vertical-align: middle;
-		}
-		& > .desc-content{
-			font-size: 23px;
-			margin-top: 50px;
-			line-height: 70px;
-		}
-	}
+  transition: left 0.3s ease-in-out;
+  & > .title-logo {
+    position: absolute;
+    left: 45%;
+    top: 22%;
+    color: #fff;
+    transform: rotate(33deg);
+    margin-left: 10%;
+    & > span {
+      display: inline-block;
+      font-size: 40px;
+      vertical-align: middle;
+      margin-right: 30px;
+    }
+    & > img {
+      width: 235px;
+      height: 89px;
+      vertical-align: middle;
+    }
+    & > .desc-content {
+      font-size: 23px;
+      margin-top: 50px;
+      line-height: 70px;
+    }
+  }
 }
-.section-left.active{
-	left: -32%;
+.section-left.active {
+  left: -32%;
 }
-.section-right.active{
-	right: -32%;
+.section-right.active {
+  right: -32%;
 }
 .section-right {
-	z-index: 2;
+  z-index: 2;
   position: absolute;
   width: 100%;
   height: 200%;
@@ -124,36 +125,36 @@ body {
   top: -100%;
   right: -111%;
   transform: rotate(-33deg);
-	transition: right 0.3s ease-in-out;
-	& > .title-logo{
-		position: absolute;
-		left: 10%;
-		top: 48%;
-		color: #fff;
-		transform: rotate(33deg);
-		width: 800px;
-        margin-right: 30px;
-		& > span{
-			display: block;
-			font-size: 40px;
-			width: 500px;
-			position: relative;
-			left: 150px;
-		}
-		& > img{
-			width: 159px;
-			height: 171px;
-			vertical-align: middle;
-			margin-left: 30px;
-			position: relative;
-			left: 200px;
-			top: 50px;
-		}
-		& > .desc-content{
-			font-size: 23px;
-			margin-top: 50px;
-			line-height: 70px;
-		}
-	}
+  transition: right 0.3s ease-in-out;
+  & > .title-logo {
+    position: absolute;
+    left: 10%;
+    top: 48%;
+    color: #fff;
+    transform: rotate(33deg);
+    width: 800px;
+    margin-right: 30px;
+    & > span {
+      display: block;
+      font-size: 40px;
+      width: 500px;
+      position: relative;
+      left: 150px;
+    }
+    & > img {
+      width: 159px;
+      height: 171px;
+      vertical-align: middle;
+      margin-left: 30px;
+      position: relative;
+      left: 200px;
+      top: 50px;
+    }
+    & > .desc-content {
+      font-size: 23px;
+      margin-top: 50px;
+      line-height: 70px;
+    }
+  }
 }
 </style>
