@@ -157,4 +157,37 @@ body {
     }
   }
 }
+
+@media only screen and (max-width: 1280px) {
+  .section-right.active {
+    .title-logo {
+      left: -28%;
+      top: 38%;
+    }
+  }
+}
+@media only screen and (min-width: 1280px) and (max-width: 1366px) {
+  .section-right.active {
+    .title-logo {
+      left: -14%;
+      top: 47%;
+    }
+  }
+}
+@media only screen and (min-width: 1366px) and (max-width: 1440px) {
+  .section-right.active {
+    .title-logo {
+      left: -5%;
+      top: 41%;
+    }
+  }
+}
+@media only screen and (min-width: 1440px) and (max-width: 1600px) {
+  .section-right.active {
+    .title-logo {
+      left: -2%;
+      top: 44%;
+    }
+  }
+}
 </style>
