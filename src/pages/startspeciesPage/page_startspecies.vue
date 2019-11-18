@@ -4,7 +4,7 @@
 <template lang="pug" >
   div
     div(class='box_container')
-      DetailModals(v-show='isShow' :list_item="list_item[selectedName]")
+      DetailModals(v-show='isShow' :list_item="list_item[selectedName]" :onClose="onModalClose")
       div(class="pic_box pic_one" 
       v-for="(item,index) of allList" :key="item.name"
       v-on:mouseenter="enter(index)"
@@ -44,9 +44,12 @@ export default {
       this.one_shade = true;
       this.current = index;
     },
+    onModalClose() {
+      this.isShow = false;
+    },
     beforeShowModal(name) {
       this.selectedName = name;
-      this.isShow = !this.isShow;
+      this.isShow = true;
       document.querySelector("body").setAttribute("style", "overflow:hidden");
     },
     showM: function(name) {
