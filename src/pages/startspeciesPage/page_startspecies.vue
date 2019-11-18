@@ -4,7 +4,7 @@
 <template lang="pug" >
   div
     div(class='box_container')
-      DetailModals(v-show='isShow' :list_item="list_item")
+      DetailModals(v-show='isShow' :list_item="list_item[selectedName]")
       div(class="pic_box pic_one" 
       v-for="(item,index) of allList" :key="item.name"
       v-on:mouseenter="enter(index)"
@@ -14,7 +14,7 @@
         div(v-show="one_shade && index == current" class="pic_one_shade") 
           span(class="titleText") {{item.name}}
           div(class="img_desc") {{item.brief}}
-          p(class="button_more" @click='showM(index)') {{buttonMsg}}	  
+          p(class="button_more" @click='showM(item.name)') {{buttonMsg}}	  
     FooterTab
 </template>
 
@@ -26,9 +26,10 @@ export default {
   data: () => {
     return {
       allList: [],
-      list_item: "",
+      list_item: {},
       one_shade: true,
       current: null,
+      selectedName: "",
       buttonMsg: "查看更多",
       isShow: false,
       b_index: 0
@@ -43,20 +44,25 @@ export default {
       this.one_shade = true;
       this.current = index;
     },
-    showM: function(index) {
+    beforeShowModal(name) {
+      this.selectedName = name;
       this.isShow = !this.isShow;
-      this.list_item = this.allList[index].content;
       document.querySelector("body").setAttribute("style", "overflow:hidden");
-      console.log(index);
+    },
+    showM: function(name) {
+      if (this.list_item[name]) {
+        this.beforeShowModal(name);
+        return;
+      }
+
+      this.$_get(`${API.START_ITEM_DATA}/${name}`).then(data => {
+        this.list_item[name] = data.data.content;
+        this.beforeShowModal(name);
+      });
     },
     leave() {
       this.one_shade = false;
       this.current = null;
-    },
-    closeM(d) {
-      this.isShow = d;
-      console.log(d);
-      console.log(this.isShow);
     }
   },
   mounted() {
