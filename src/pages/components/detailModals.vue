@@ -7,25 +7,26 @@ div(class='container' @click='c_close' v-show="isShow")
 </template>
 <script>
 export default {
-  name: 'detailModals',
-  props: ['list_item','p_isShow'],
+  name: "detailModals",
+  props: ["list_item", "p_isShow", "onClose"],
   data() {
     return {
       isShow: true
+    };
+  },
+  watch: {
+    isShow: function() {
+      console.log(this.isShow);
     }
   },
- watch: {
-   isShow:function(){
-     console.log(this.isShow)
-   }
- },
   methods: {
     c_close: function() {
-     this.isShow = !this.isShow ;
-     document.querySelector('body').removeAttribute('style')
+      this.isShow = false;
+      this.onClose && this.onClose();
+      document.querySelector("body").removeAttribute("style");
     }
   }
-}
+};
 </script>
 <style lang="scss" scoped>
 .container {
