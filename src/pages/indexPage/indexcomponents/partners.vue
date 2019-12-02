@@ -1,4 +1,4 @@
-<template lang="pug">
+﻿<template lang="pug">
 .container
 	div(class='partners_box')
 		div(class='partners_title')
@@ -88,12 +88,8 @@ export default {
       max-height: 100px;
     }
 	}
-	.partners_list:nth-child(1),.partners_list:nth-child(4){
+	.partners_list{
 		margin-right: 47px;
-	}
-	.partners_list:nth-child(2),.partners_list:nth-child(5){
-		margin-right: 94px;
-		margin-left: 47px;
 	}
 	.photographer_list{
 		font-family: PingFangSC-Semibold;
