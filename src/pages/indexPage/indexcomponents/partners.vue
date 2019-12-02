@@ -89,7 +89,7 @@ export default {
     }
 	}
 	.partners_list{
-		margin-right: 47px;
+		margin-right: 47px; 
 	}
 	.photographer_list{
 		font-family: PingFangSC-Semibold;
