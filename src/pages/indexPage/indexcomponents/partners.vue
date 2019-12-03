@@ -84,8 +84,8 @@ export default {
 		height: 118px;
 		margin-bottom: 30px;
     & img{
-      max-width: 300px;
-      max-height: 100px;
+      max-width: 225px;
+      max-height: 75px;
     }
 	}
 	.partners_list{
