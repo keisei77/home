@@ -12,7 +12,7 @@
             )
                 img(:src="item.thumbnail")
                 div(v-show="one_shade && index == current" class="list_img_shade")
-                    span(class="titleText") {{item.name}}
+                    span(class="titleText") {{JSON.parse(item.name)}}
                     span(class="img_desc") {{item.brief}}
                     span(class="t")
                     a(class='btn' @click="getDetailsPage(item)") {{btn_msg}}
@@ -31,92 +31,7 @@ export default {
       one_shade: true,
       current: null,
       currentId: null,
-      list_details: [
-        {
-          id: 1,
-          imgURL: "http://w.wfjjt.top/list_details01.png",
-          imgTitle: "天行长臂猿",
-          imgMsg:
-            "天行长臂猿（学名：Hoolock tianxing）：成年天行长臂猿的体长600-900厘米，后足长140-153厘米，颅全长93-99厘米；体重6-8.5千克。雄性和雌性的体型差别不大，但雄性有长阴毛；对生而短的拇指；弯曲的手指悬挂时可牢固抓握。无尾。前肢明显长于后肢，用来悬挂和在树间荡臂。"
-        },
-        {
-          id: 2,
-          imgURL: "http://w.wfjjt.top/list_details02.png",
-          imgTitle: "天行长臂猿",
-          imgMsg:
-            "天行长臂猿（学名：Hoolock tianxing）：成年天行长臂猿的体长600-900厘米，后足长140-153厘米，颅全长93-99厘米；体重6-8.5千克"
-        },
-        {
-          id: 3,
-          imgURL: "http://w.wfjjt.top/list_details03.png",
-          imgTitle: "天行长臂猿",
-          imgMsg:
-            "天行长臂猿（学名：Hoolock tianxing）：成年天行长臂猿的体长600-900厘米，后足长140-153厘米，颅全长93-99厘米；体重6-8.5千克"
-        },
-        {
-          id: 4,
-          imgURL: "http://w.wfjjt.top/list_details02.png",
-          imgTitle: "天行长臂猿",
-          imgMsg:
-            "天行长臂猿（学名：Hoolock tianxing）：成年天行长臂猿的体长600-900厘米，后足长140-153厘米，颅全长93-99厘米；体重6-8.5千克"
-        },
-        {
-          id: 5,
-          imgURL: "http://w.wfjjt.top/list_details01.png",
-          imgTitle: "天行长臂猿",
-          imgMsg:
-            "天行长臂猿（学名：Hoolock tianxing）：成年天行长臂猿的体长600-900厘米，后足长140-153厘米，颅全长93-99厘米；体重6-8.5千克"
-        },
-        {
-          id: 6,
-          imgURL: "http://w.wfjjt.top/list_details03.png",
-          imgTitle: "天行长臂猿",
-          imgMsg:
-            "天行长臂猿（学名：Hoolock tianxing）：成年天行长臂猿的体长600-900厘米，后足长140-153厘米，颅全长93-99厘米；体重6-8.5千克"
-        },
-        {
-          id: 7,
-          imgURL: "http://w.wfjjt.top/list_details01.png",
-          imgTitle: "天行长臂猿",
-          imgMsg:
-            "天行长臂猿（学名：Hoolock tianxing）：成年天行长臂猿的体长600-900厘米，后足长140-153厘米，颅全长93-99厘米；体重6-8.5千克"
-        },
-        {
-          id: 8,
-          imgURL: "http://w.wfjjt.top/list_details03.png",
-          imgTitle: "天行长臂猿",
-          imgMsg:
-            "天行长臂猿（学名：Hoolock tianxing）：成年天行长臂猿的体长600-900厘米，后足长140-153厘米，颅全长93-99厘米；体重6-8.5千克"
-        },
-        {
-          id: 9,
-          imgURL: "http://w.wfjjt.top/list_details02.png",
-          imgTitle: "天行长臂猿",
-          imgMsg:
-            "天行长臂猿（学名：Hoolock tianxing）：成年天行长臂猿的体长600-900厘米，后足长140-153厘米，颅全长93-99厘米；体重6-8.5千克"
-        },
-        {
-          id: 10,
-          imgURL: "http://w.wfjjt.top/list_details03.png",
-          imgTitle: "天行长臂猿",
-          imgMsg:
-            "天行长臂猿（学名：Hoolock tianxing）：成年天行长臂猿的体长600-900厘米，后足长140-153厘米，颅全长93-99厘米；体重6-8.5千克"
-        },
-        {
-          id: 11,
-          imgURL: "http://w.wfjjt.top/list_details02.png",
-          imgTitle: "天行长臂猿",
-          imgMsg:
-            "天行长臂猿（学名：Hoolock tianxing）：成年天行长臂猿的体长600-900厘米，后足长140-153厘米，颅全长93-99厘米；体重6-8.5千克"
-        },
-        {
-          id: 12,
-          imgURL: "http://w.wfjjt.top/list_details01.png",
-          imgTitle: "天行长臂猿",
-          imgMsg:
-            "天行长臂猿（学名：Hoolock tianxing）：成年天行长臂猿的体长600-900厘米，后足长140-153厘米，颅全长93-99厘米；体重6-8.5千克"
-        }
-      ]
+      list_details:[]
     };
   },
   methods: {
@@ -128,6 +43,7 @@ export default {
       this.one_shade = false;
       this.current = null;
     },
+
     getQueryVariable(variable) {
       let reg = new RegExp("(^|&)" + variable + "=([^&]*)(&|$)", "i");
       let r = window.location.search.substr(1).match(reg);
@@ -170,7 +86,6 @@ export default {
         if(!res.data.isError){
           this.list_details = res.data;
         }
-        console.log(res.data)
     })
     },
     getDetailsPage(item){

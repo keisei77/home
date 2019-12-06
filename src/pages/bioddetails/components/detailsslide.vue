@@ -2,15 +2,15 @@
   <div>
       <!-- swiper1 -->
       <swiper :options="swiperOptionTop" class="gallery-top" ref="swiperTop">
-        <swiper-slide class="slide-1" v-for="itemImg of swiperImg" :key="itemImg.id">
-          <img :src="itemImg.largeImg" :alt="itemImg.title">
+        <swiper-slide class="slide-1" v-for="(itemImg,index) of JSON.parse(the_details.imgUrl)" :key="index">
+          <img :src="win_url ? hostName + itemImg : itemImg" alt="">
         </swiper-slide>
       </swiper>
       <!-- swiper2 Thumbs -->
       <swiper :options="swiperOptionThumbs" class="gallery-thumbs" ref="swiperThumbs">
-        <swiper-slide class="slide-1" v-for="itemImg of swiperImg" :key="itemImg.id">
+        <swiper-slide class="slide-1" v-for="(itemImg,index) of JSON.parse(the_details.imgUrl)" :key="index">
           <div class="imgItem">
-            <img :src="itemImg.largeImg" :alt="itemImg.title">
+            <img :src="win_url ? hostName +itemImg : itemImg" alt="">
           </div>
         </swiper-slide>
       </swiper>
@@ -29,6 +29,8 @@ export default {
   props:["the_details"],
   data() {
     return {
+      win_url:true,
+      hostName:"http://www.wildgaoligong.com",
       swiperOptionTop: {
         spaceBetween: 10,
         effect: 'fade',
@@ -42,41 +44,18 @@ export default {
         loop: true,
         loopedSlides: 5,//looped slides should be the same
       },
-      swiperImg:[
-        {
-          id:1,
-          title: 'slide1',
-          largeImg:'http://w.wfjjt.top/j.jpg'
-        },
-        {
-          id:2,
-          title:'slide2',
-          largeImg:'http://w.wfjjt.top/y.jpg'
-        },
-        {
-          id:3,
-          title:'slide3',
-          largeImg:'http://w.wfjjt.top/j.jpg'
-        },
-        {
-          id:4,
-          title:'slide4',
-          largeImg:'http://w.wfjjt.top/y.jpg'
-        },
-        {
-          id:5,
-          title:'slide5',
-          largeImg:'http://w.wfjjt.top/j.jpg'
-        },
-        {
-          id:6,
-          title:'slide6',
-          largeImg:'http://w.wfjjt.top/y.jpg'
-        }
-      ]
+      swiperImg:[]
+    }
+  },
+  methods:{
+    getWinUrl(){
+      //判断是本地还是线上 true为本地,false为线上
+      var win = window.location.hostname;
+      this.win_url = win == "localhost" ? true : false
     }
   },
   mounted() {
+    this.getWinUrl()
     this.$nextTick(() => {
       const swiperTop = this.$refs.swiperTop.swiper
       const swiperThumbs = this.$refs.swiperThumbs.swiper

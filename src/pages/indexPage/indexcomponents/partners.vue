@@ -20,10 +20,10 @@
 				a(:href='partners.link')
 					img(class='partners_list_img' :src='partners.imgUrl' :alt='partners.description')
 					
-		div(class="photographer_list_title")感谢以下摄影师为本网站无偿提供的高质量图片：
+		div(class="photographer_list_title") 感谢以下摄影师为本网站无偿提供的高质量图片：
 		div(class="photographer_list") 
 				span(v-for='item of photographer' v-text="item.title")
-		div(class="photographer_list_memo")本站所有图片为摄影师版权所有，禁止以任何形式转载使用。
+		div(class="photographer_list_memo") 本站所有图片为摄影师版权所有，禁止以任何形式转载使用。
 	footer-tab
 </template>
 <script>

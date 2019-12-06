@@ -3,3 +3,5 @@ dist
 .history/
 .DS_STORE
 src/.DS_STORE
+.idea
+.vs

@@ -1,65 +1,22 @@
 <template>
     <ul class='page'>
-        <li class='li_style' v-for="mark_item of listmark" :key="mark_item.id" :my_mark='mark_item.markers'>
-            <span class="product-mark">{{mark_item.title}}</span>
-            <span class='mark-kind' :class="[mark_item.id == 1 ? greenColor : mark_item.id == 2 ? redColor : yellowColor]" v-for="mark of mark_item.markers" :key="mark.id">{{mark.mark}}</span>
+        <li class='li_style' v-for="(item,index) of sumList" :key="index" >
+            <span class="product-mark">{{item.title}}</span>
+            <span class='mark-kind markStyle' :style="{backgroundColor:mark.backgroundColor}" v-for="mark of item.markDetail" :key="mark.id">{{mark.name}}</span>
         </li>
     </ul>
 </template>
 <script>
 export default {
     name:'Thepag',
+    props:["sumList"],
     data() {
         return {
-           greenColor: 'greenStyle',
-           redColor: 'redStyle',
-           yellowColor: 'yellowStyle',
-           listmark:[
-               {
-                   id:1,
-                   title:'保护等级',
-                   markers:[
-                       {
-                           id:1,
-                           mark: '国家一级'
-                       },
-                       {
-                           id:2,
-                           mark: '世界一级'
-                       }
-                   ]
-               },
-               {
-                   id:2,
-                   title:'濒危等级',
-                   markers:[
-                       {
-                           id:1,
-                           mark: '极度濒危'
-                       }
-                   ]
-               },
-               {
-                   id:3,
-                   title:'物种分类',
-                   markers:[
-                       {
-                           id:1,
-                           mark: '鸟类'
-                       },
-                       {
-                           id:2,
-                           mark: '鹗属'
-                       },
-                       {
-                           id:3,
-                           mark: '鸟类'
-                       }
-                   ]
-               }
-           ] 
+           
         }
-    }
+    },
+  
+    
 }
 </script>
 <style lang="scss" scoped>
@@ -96,19 +53,7 @@ export default {
         color:white;
         font-weight: 400;
     }
-    .greenStyle{
-        background-color:#4CA100;
-        border: 0 solid #84C556;
-        border-radius: 11px;
-    }
-    .redStyle{
-        background-color:#FF0000;
-        border: 0 solid #FF0000;
-        border-radius: 11px;
-    }
-    .yellowStyle{
-        background-color:#F5A623;
-        border: 0 solid #F5A623;
+    .markStyle{
         border-radius: 11px;
     }
 

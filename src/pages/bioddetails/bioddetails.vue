@@ -3,7 +3,7 @@
         HeaderTab
         Details(:the_details="the_details")
         DetailsSlide(:the_details="the_details")
-        ThePag(:the_details="the_details")
+        ThePag(:sumList="sumList")
         Content(:the_details="the_details")
         FooterTab
 </template>
@@ -27,7 +27,8 @@ export default {
     data() {
         return {
             currentId:'',
-            the_details:{}
+            the_details:{},
+            sumList:[]
         }
     },
     methods: {
@@ -42,7 +43,31 @@ export default {
             }
             this.$_get(API.BIODIVERSITY_DETAIL+this.currentId).then(res => {
                 if(!res.data.isError){
-                this.the_details = res.data;
+                    this.the_details = res.data;
+                    var protectionClass = []
+                    var endangeredCategory = []
+                    var speciesTaxonomy = []
+                    var i = 0;
+                    if(this.the_details.labels){
+                        for(i;i<this.the_details.labels.length;i++){
+                        if(this.the_details.labels[i].type == "濒危等级"){
+                            endangeredCategory.push(this.the_details.labels[i])
+                        }else if(this.the_details.labels[i].type == "保护等级"){
+                            protectionClass.push(this.the_details.labels[i])
+                        }else{
+                            speciesTaxonomy.push(this.the_details.labels[i])
+                        }
+                    }
+                    }
+                    if(protectionClass.length){
+                        this.sumList.push({title:"保护等级",markDetail:protectionClass})
+                    }
+                    if(endangeredCategory.length){
+                        this.sumList.push({title:"濒危等级",markDetail:endangeredCategory})
+                    }
+                    if(speciesTaxonomy.length){
+                        this.sumList.push({title:"物种分类",markDetail:speciesTaxonomy})
+                    } 
                 }
                 //console.log(this.details)
             })

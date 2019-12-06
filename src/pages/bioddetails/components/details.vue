@@ -1,8 +1,8 @@
 <template lang='pug'>
     div(class='details_box')
         div(class='details_title')
-            span(class='title_CN' v-text="the_details.content.common") 
-            i(class='title_EN' v-text="the_details.content.latin")
+            span(class='title_CN' v-text="JSON.parse(the_details.name).common") 
+            i(class='title_EN' v-text="JSON.parse(the_details.name).latin")
 </template>
 <script>
 export default {
