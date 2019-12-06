@@ -10,12 +10,12 @@
             v-on:mouseenter="enter(index)"
             v-on:mouseleave="leave()"
             )
-                img(:src="item.thumbnail")
-                div(v-show="one_shade && index == current" class="list_img_shade")
-                    span(class="titleText") {{JSON.parse(item.name)}}
+                img(:src="win_url ? localHostName + item.thumbnail : item.thumbnail")
+                div(v-show="one_shade && index == current" class="list_img_shade" @click="getDetailsPage(item)")
+                    span(class="titleText") {{item.name.split("\"")[3]}}
                     span(class="img_desc") {{item.brief}}
                     span(class="t")
-                    a(class='btn' @click="getDetailsPage(item)") {{btn_msg}}
+                    a(class='btn') {{btn_msg}}
                     
 </template>
 <script>
@@ -31,10 +31,20 @@ export default {
       one_shade: true,
       current: null,
       currentId: null,
-      list_details:[]
+      list_details:[],
+      win_url:true,
+      localHostName:"http://www.wildgaoligong.com",
     };
   },
+  created() {
+    this.getIdPages();
+    this.getWinUrl();
+  },
   methods: {
+    getWinUrl(){
+      const win = window.location.hostname;
+      this.win_url = win == "localhost" ? true : false
+    },
     enter(index) {
       this.one_shade = true;
       this.current = index;
@@ -54,7 +64,6 @@ export default {
       var url = location.search;
       if (url.indexOf("?") != -1) {    //判断是否有参数
         var str = url.substr(1);       //从第一个字符开始 因为第0个是?号 获取所有除问号的所有符串
-        //console.log(str);
         var strs = str.split("=");   //用等号进行分隔 （因为知道只有一个参数 所以直接用等号进分隔 如果有多个参数 要用&号分隔 再用等号进行分隔）
         this.currentId = strs[1];          //直接弹出第一个参数 （如果有多个参数 还要进行循环的）
       }
@@ -93,19 +102,7 @@ export default {
     }
 
   },
-  created() {
-    this.getIdPages();
-    // if (this.getQueryVariable("id")) {
-    //   this.$_get(API.BIODIVERSITY_DETAIL_LIST_DATA, {
-    //     speciesId: this.getQueryVariable("id")
-    //   }).then(res => {
-    //     console.log(res)
-    //     if (!res.data.isError) {
-    //       this.kindList = res.data;
-    //     }
-    //   });
-    // }
-  }
+  
 };
 </script>
 
@@ -178,6 +175,7 @@ export default {
   width: 100%;
   height: 100%;
   background: rgba($color: #000000, $alpha: 0.75);
+  cursor: pointer;
 }
 .titleText {
   display: block;

@@ -43,7 +43,7 @@ export default {
     }
     .mark-kind{
         display:inline-block;
-        width: 100px;
+        width: auto;
         height: 22px;
         line-height: 22px;
         font-family: PingFangSC-Semibold;
@@ -52,6 +52,8 @@ export default {
         margin-left: 13px;
         color:white;
         font-weight: 400;
+        padding:0 16px;
+        box-sizing: border-box;
     }
     .markStyle{
         border-radius: 11px;

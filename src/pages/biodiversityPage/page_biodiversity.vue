@@ -4,9 +4,9 @@
 <template lang="pug">
   div
     div(class="biod_container")
-      div(class="biod_box" v-for="(item, index) of kindList" v-bind:key="item.id")
-        img(class="img_box" :src="item.thumbnail && item.thumbnail.indexOf('http') !== -1 ? item.thumbnail : 'http://w.wfjjt.top/bird.png' ")
-        a(id="detail" @click="getBirdiversityList(item)") {{ item.title }}
+      div(class="biod_box" v-for="(item, index) of kindList" v-bind:key="item.id" @click="getBirdiversityList(item)")
+        img(class="img_box" :src="win_url ? localHostName + item.thumbnail : item.thumbnail")
+        a(id="detail" ) {{ item.title }}
     FooterTab    
 </template>
 <script>
@@ -18,38 +18,9 @@ export default {
       },
   data: () => {
     return {
-      kindList:[
-        {
-          id:'001',
-          imgURL:'http://w.wfjjt.top/bird.png',
-          kindName:'鸟类'
-        },
-        {
-          id:'002',
-          imgURL:'http://w.wfjjt.top/snake.png',
-          kindName:'哺乳类'
-        },
-        {
-          id:'003',
-          imgURL:'http://w.wfjjt.top/bird.png',
-          kindName:'鱼类'
-        },
-        {
-          id:'004',
-          imgURL:'http://w.wfjjt.top/snake.png',
-          kindName:'两栖爬行类'
-        },
-        {
-          id:'005',
-          imgURL:'http://w.wfjjt.top/bird.png',
-          kindName:'植物与真菌'
-        },
-        {
-          id:'006',
-          imgURL:'http://w.wfjjt.top/snake.png',
-          kindName:'无脊椎动物'
-        }
-      ]
+      win_url:true,
+      localHostName:"http://www.wildgaoligong.com",
+      kindList:[]
     }
   },
   created() {
@@ -58,8 +29,13 @@ export default {
         this.kindList = res.data;
       }
     })
+    this.getWinUrl()
   },
   methods: {
+    getWinUrl(){
+      const win = window.location.hostname;
+      this.win_url = win == "localhost" ? true : false
+    },
     getBirdiversityList(item) {
       location.href = `/bioddetailslist.html?id=${item.id}`
     }
@@ -71,8 +47,8 @@ export default {
   .biod_container{
     width:1230px;
     height: 980px;
-    margin:150px auto 0px;
-    margin-bottom:60px;
+    margin:110px auto 0px;
+    margin-bottom:100px;
   }
   .biod_box{
     width:382px;
@@ -81,8 +57,12 @@ export default {
     background: #FFFFFF;
     box-shadow: 0 11px 37px 0 rgba(220,220,220,0.50);
     float:left;
-    margin-bottom:50px;
+    margin-bottom:70px;
     cursor:pointer;
+  }
+  .img_box{
+    width:100%;
+    height:100%;
   }
   a{
     display:block;
