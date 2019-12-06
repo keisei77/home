@@ -2,13 +2,13 @@
   <div>
       <!-- swiper1 -->
       <swiper :options="swiperOptionTop" class="gallery-top" ref="swiperTop">
-        <swiper-slide class="slide-1" v-for="(itemImg,index) of the_details.thumbnails" :key="index">
+        <swiper-slide class="slide-1" v-for="(itemImg,index) of ImgUrl" :key="index">
           <img :src="win_url ? hostName + itemImg : itemImg" alt="">
         </swiper-slide>
       </swiper>
       <!-- swiper2 Thumbs -->
       <swiper :options="swiperOptionThumbs" class="gallery-thumbs" ref="swiperThumbs">
-        <swiper-slide class="slide-1" v-for="(itemImg,index) of the_details.thumbnails" :key="index">
+        <swiper-slide class="slide-1" v-for="(itemImg,index) of ImgUrl" :key="index">
           <div class="imgItem">
             <img :src="win_url ? hostName +itemImg : itemImg" alt="">
           </div>
@@ -26,7 +26,7 @@ export default {
       swiper,
       swiperSlide
   },
-  props:["the_details"],
+  props:["ImgUrl"],
   data() {
     return {
       win_url:true,

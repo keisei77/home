@@ -2,7 +2,7 @@
     div
         HeaderTab
         Details(:the_details="the_details")
-        DetailsSlide(:the_details="the_details")
+        DetailsSlide(:ImgUrl="ImgUrl")
         ThePag(:sumList="sumList")
         Content(:the_details="the_details")
         FooterTab
@@ -28,7 +28,8 @@ export default {
         return {
             currentId:'',
             the_details:{},
-            sumList:[]
+            sumList:[],
+            ImgUrl:[]
         }
     },
     methods: {
@@ -44,6 +45,14 @@ export default {
             this.$_get(API.BIODIVERSITY_DETAIL+this.currentId).then(res => {
                 if(!res.data.isError){
                     this.the_details = res.data;
+
+                    var tempList = this.the_details.imgUrl.split('"')
+                    tempList.map(item => {
+                        if(item !== "," && item !== "[" && item !== "]"){
+                        this.ImgUrl.push(item)
+                        }
+                    })
+
                     var protectionClass = []
                     var endangeredCategory = []
                     var speciesTaxonomy = []
