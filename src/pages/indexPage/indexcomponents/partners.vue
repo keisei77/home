@@ -5,7 +5,7 @@
 			div(class='partners_title_box')
 				div(class="CH_title") 主办方
 					p(class="EN_title")
-						i PARTNERS TEST
+						i PARTNERS
 		div(class='partners_group')
 			div(class='partners_list' v-for='item of organizer')
 				a(:href='item.link')
