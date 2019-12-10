@@ -37,7 +37,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-	.partners_box{
+	.partners_box{ 
 		width: 100%;
 		/*height: calc(100vh - 90px);*/
     padding-top: 70px;
