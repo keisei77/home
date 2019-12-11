@@ -108,7 +108,7 @@ export default {
   font-family: PingFangSC-Semibold;
   text-align: center;
   font-size: 18px;
-  max-width: 1100px;
+  max-width: 600px;
   margin: 0 auto;
   /*margin-top: -20px;*/
   color: #2d2f29;
