@@ -14,7 +14,7 @@
 			div(class='partners_title_box')
 				div(class="CH_title") 支持单位
 					p(class="EN_title")
-						i SUPPORT
+						i SUPPORT test
 		div(class='partners_group')
 			div(class='partners_list' v-for='partners of partners_data')
 				a(:href='partners.link')
