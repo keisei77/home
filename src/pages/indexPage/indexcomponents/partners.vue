@@ -75,7 +75,7 @@ export default {
   letter-spacing: 0.6px;
 }
 .partners_group {
-  width: 1200px;
+  max-width: 830px;
   margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
