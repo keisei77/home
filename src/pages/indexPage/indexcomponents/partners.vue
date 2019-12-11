@@ -95,11 +95,11 @@ export default {
 		margin-right: 47px; 
 	}
 	.photographer_list_title{
-		line-height:150%;font-weight: bold;text-align:center;}
+		line-height:250%;font-weight: bold;text-align:center;}
 	.photographer_list_memo{
-		line-height:150%;text-align:center;}
+		line-height:250%;text-align:center;}
 	.photographer_list{
-		line-height:150%;
+		line-height:250%;
 		font-family: PingFangSC-Semibold;
 		text-align: center;
 		font-size: 18px;
