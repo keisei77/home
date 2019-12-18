@@ -52,7 +52,7 @@ export default {
   }
   .biod_box{
     width:382px;
-    height:465px;
+    height: 382px;
     margin:0 13.5px 50px;
     background: #FFFFFF;
     box-shadow: 0 11px 37px 0 rgba(220,220,220,0.50);
@@ -64,14 +64,16 @@ export default {
     width:100%;
     height:100%;
   }
-  a{
-    display:block;
-    text-decoration:none;
-    font-family:PingFangSC-Semibold;
-    font-size:26px;
+  a{    
+    display: block;
+    text-decoration: none;
+    font-family: PingFangSC-Semibold;
+    font-size: 26px;
     color: #2D2F29;
-    line-height:37px;
-    text-align:center;
-    margin-top:20px;
+    line-height: 60px;
+    text-align: center;
+    margin-top: -60px;
+    position: relative;
+    background-color: rgba(255, 255, 255, 0.4);
   }
 </style>
