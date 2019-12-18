@@ -151,9 +151,9 @@ body {
       top: 50px;
     }
     & > .desc-content {
-      font-size: 23px;
+      font-size: 1.4vw;
       margin-top: 50px;
-      line-height: 70px;
+      line-height: 280%;
     }
   }
 }
