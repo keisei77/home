@@ -1,5 +1,5 @@
 /** 
-  我是高黎贡山介绍页面
+  高黎贡山介绍
 */
 <template lang="pug">
   div

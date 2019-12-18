@@ -1,5 +1,5 @@
 /** 
-  明星物种页面
+  明星物种 - 高黎贡山
 */
 <template lang="pug" >
   div
