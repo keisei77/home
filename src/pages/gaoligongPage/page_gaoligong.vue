@@ -53,7 +53,7 @@ export default {
 <style lang="scss" scoped>
 .slide_box {
   width: 100%;
-  height: 900px;
+  height: 600px;
 }
 .gaoligong_info {
   width: 1200px;
