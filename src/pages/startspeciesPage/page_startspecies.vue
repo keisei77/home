@@ -95,7 +95,7 @@ export default {
 <style lang="scss" scoped>
 .box_container {
   width: 100%;
-  height: 1080px;
+  height: 92vh;
   display: flex;
 }
 .pic_box {
@@ -125,7 +125,7 @@ export default {
   height: 56px;
   line-height: 56px;
   text-align: center;
-  margin-top: 340px;
+  margin-top: 50%;
   margin-bottom: 80px;
 }
 .img_desc {
