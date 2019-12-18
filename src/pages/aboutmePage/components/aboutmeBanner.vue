@@ -90,7 +90,7 @@ body {
     top: 22%;
     color: #fff;
     transform: rotate(33deg);
-    margin-left: 10%;
+    margin-left: 4%;
     & > span {
       display: inline-block;
       font-size: 40px;
