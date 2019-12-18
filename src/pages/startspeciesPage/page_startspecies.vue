@@ -129,8 +129,7 @@ export default {
   margin-bottom: 80px;
 }
 .img_desc {
-  width: 360px;
-  height: 192px;
+  width: 80%;
   font-family: PingFangSC-Regular;
   font-size: 14px;
   color: #9d9e9c;
