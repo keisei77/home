@@ -2,7 +2,7 @@
     <ul class='page'>
         <li class='li_style' v-for="(item,index) of sumList" :key="index" >
             <span class="product-mark">{{item.title}}</span>
-            <span class='mark-kind markStyle' v-for="mark of item.markDetail" :key="mark.id">{{mark.name}}</span>
+            <span class='mark-kind markStyle' :style="{backgroundColor:mark.backgroundColor}" v-for="mark of item.markDetail" :key="mark.id">{{mark.name}}</span>
         </li>
     </ul>
 </template>
