@@ -1,0 +1,1 @@
+span (v-for='item of photographer' v-text="item.title")
