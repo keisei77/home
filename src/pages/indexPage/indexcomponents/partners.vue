@@ -113,8 +113,6 @@ export default {
   /*margin-top: -20px;*/
   color: #2d2f29;
   span {
-    
-  word-wrap:break-word;
     margin-left: 15px;
   }
 }
