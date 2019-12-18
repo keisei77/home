@@ -104,7 +104,8 @@ export default {
   line-height: 250%;
   text-align: center;
 }
-.photographer_list {word-wrap:break-word
+.photographer_list {
+  word-wrap:break-word;
   line-height: 250%;
   font-family: PingFangSC-Semibold;
   text-align: center;
