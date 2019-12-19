@@ -4,13 +4,12 @@
 </template>
 <script>
 export default {
-    name: 'header_tab'
-}
+  name: "header_tab"
+};
 </script>
 <style lang="scss" scoped>
-    .header_tab{
-       width: 100%;
-       height: 88px;
-       background: url('../../../images/header_tab.png');
-    }
+.header_tab {
+  width: 100%;
+  height: 88px;
+}
 </style>
