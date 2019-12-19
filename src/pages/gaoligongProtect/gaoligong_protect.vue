@@ -24,7 +24,7 @@ export default {
   mounted() {
     let q_name = window.location.search.substr(6);
     this.$_get(API.GAOLIGONG_DATA + "/" + q_name).then(res => {
-      console.log(res);
+      //   console.log(res);
     });
   }
 };

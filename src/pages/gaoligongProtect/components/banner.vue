@@ -3,8 +3,8 @@
         div(class='banner_box')
             img(class='banner_img' :src="win_url ? hostName +itemImg : itemImg")
             div(class='banner_info')
-                div(class='banner_title') 保护工作
-                    span(class='banner_title_EN') Conservation Actions
+                div(class='banner_title' v-text="activeBannerList.title") 
+                    span(class='banner_title_EN' v-text="activeBannerList.enTitle")
                 
 
 </template>
@@ -15,8 +15,37 @@ export default {
     return {
       win_url: true,
       itemImg: "/ufs/2019/9/283844d5897b4daf9bb752f10858573d.jpg",
-      hostName: "http://www.wildgaoligong.com"
+      hostName: "http://www.wildgaoligong.com",
+      s_title: {
+        title: "生态系统",
+        enTitle: "Cecological System"
+      },
+      b_title: {
+        title: "保护工作",
+        enTitle: "Conservation Actions"
+      },
+      r_title: {
+        title: "历史人文",
+        enTitle: "History Related"
+      }
     };
+  },
+  computed: {
+    activeBannerList() {
+      let r = window.location.search.substr(6);
+      let p_name = decodeURI(r);
+      let temp = {};
+      if (p_name === "生态系统") {
+        temp = this.s_title;
+      }
+      if (p_name === "保护工作") {
+        temp = this.b_title;
+      }
+      if (p_name === "历史人文") {
+        temp = this.r_title;
+      }
+      return temp;
+    }
   },
   methods: {
     getWinUrl() {
