@@ -1,3 +1,4 @@
+//生态
 export let s_data = [{
         banner_work_title: "半常绿季雨林",
         banner_work_msg: "两层的封闭的乔木层，降水充沛，干湿季分明，常绿乔木与雨林植物",
@@ -9,6 +10,7 @@ export let s_data = [{
         banner_work_img: "s2.png"
     }
 ]
+//保护
 export let b_data = [{
         banner_work_title: "保护管理",
         banner_work_msg: "两层的封闭的乔木层，降水充沛，干湿季分明，常绿乔木与雨林植物",
@@ -20,7 +22,7 @@ export let b_data = [{
         banner_work_img: "s2.png"
     }
 ]
-
+//历史人文
 export let r_data = [{
         banner_work_title: "云端上的战争",
         banner_work_msg: "两层的封闭的乔木层，降水充沛，干湿季分明，常绿乔木与雨林植物",
