@@ -1,84 +1,87 @@
-'use strice'
+"use strice";
 
-const path = require('path')
-const fs = require('fs')
-const merge = require("webpack-merge")
-const VueLoaderPlugin = require('vue-loader/lib/plugin')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const HtmlWebpackPlugin = require("html-webpack-plugin")
-const CompressionPlugin = require("compression-webpack-plugin")
-const productionConfig = require("./webpack.prod")
-const developmentConfig = require("./webpack.dev")
+const path = require("path");
+const fs = require("fs");
+const merge = require("webpack-merge");
+const VueLoaderPlugin = require("vue-loader/lib/plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CompressionPlugin = require("compression-webpack-plugin");
+const productionConfig = require("./webpack.prod");
+const developmentConfig = require("./webpack.dev");
 
-const ROOT_PATH = path.resolve(__dirname, '..')
-const ENTRY_PATH = path.resolve(__dirname, '../src/js/')
-const PAGES_PATH = path.resolve(__dirname, '../views/')
+const ROOT_PATH = path.resolve(__dirname, "..");
+const ENTRY_PATH = path.resolve(__dirname, "../src/js/");
+const PAGES_PATH = path.resolve(__dirname, "../views/");
 
 const entriesJs = [
-  'aboutme.js',
-  'bioddetails.js',
-  'bioddetailslist.js',
-  'biodiversity.js',
-  'films.js',
-  'gaoligong.js',
-  'gaoligongprotect.js',
-  'index.js',
-  'startspecies.js',
-]
+  "aboutme.js",
+  "bioddetails.js",
+  "bioddetailslist.js",
+  "biodiversity.js",
+  "films.js",
+  "gaoligong.js",
+  "gaoligongprotect.js",
+  "index.js",
+  "startspecies.js",
+  "speciesdetail.js"
+];
 
-const entries = (entriesArray) => {
-  let jsPaths = {}
-  let files = entriesArray ? entriesArray : fs.readdirSync(ENTRY_PATH)
+const entries = entriesArray => {
+  let jsPaths = {};
+  let files = entriesArray ? entriesArray : fs.readdirSync(ENTRY_PATH);
   for (let file of files) {
     if (fs.statSync(path.join(ENTRY_PATH, file)).isFile()) {
-      let name = path.parse(file).name
-      jsPaths[name] = path.join(ENTRY_PATH, name)
+      let name = path.parse(file).name;
+      jsPaths[name] = path.join(ENTRY_PATH, name);
     }
   }
-  jsPaths.vue = 'vue'
-  return jsPaths
-}
+  jsPaths.vue = "vue";
+  return jsPaths;
+};
 
 const views = () => {
-  let pages = []
-  let files = fs.readdirSync(PAGES_PATH)
+  let pages = [];
+  let files = fs.readdirSync(PAGES_PATH);
   for (file of files) {
     if (fs.statSync(path.join(PAGES_PATH, file)).isFile()) {
-      let name = path.parse(file).name
-      let ext = path.parse(file).ext
-      pages.push(new HtmlWebpackPlugin({
-        filename: `${name}.html`,
-        template: path.join(PAGES_PATH, `${name}${ext}`),
-        chunks: ['vue', 'axios', 'common', `${name}`],
-        chunksSortMode: 'manual',
-        minify: {
-          collapseWhitespace: true
-        }
-      }))
+      let name = path.parse(file).name;
+      let ext = path.parse(file).ext;
+      pages.push(
+        new HtmlWebpackPlugin({
+          filename: `${name}.html`,
+          template: path.join(PAGES_PATH, `${name}${ext}`),
+          chunks: ["vue", "axios", "common", `${name}`],
+          chunksSortMode: "manual",
+          minify: {
+            collapseWhitespace: true
+          }
+        })
+      );
     }
   }
-  return pages
-}
+  return pages;
+};
 
 const generateConfig = (isProd, isCompress) => {
   let spritesConfig = {
     spritePath: "images",
-    filterBy: function (image) {
-      if (image.url.indexOf('/images/sprites/') === -1) {
-        return Promise.reject()
+    filterBy: function(image) {
+      if (image.url.indexOf("/images/sprites/") === -1) {
+        return Promise.reject();
       }
-      return Promise.resolve()
-    },
-  }
+      return Promise.resolve();
+    }
+  };
 
   let scriptLoader = [
     {
       loader: "babel-loader",
       options: {
-        plugins: isProd ? ['lodash'] : []
-      },
+        plugins: isProd ? ["lodash"] : []
+      }
     }
-  ]
+  ];
 
   let vueLoader = [
     {
@@ -87,32 +90,32 @@ const generateConfig = (isProd, isCompress) => {
         loaders: {
           scss: [
             // MiniCssExtractPlugin.loader,
-            'vue-style-loader',
-            'css-loader',
-            'postcss-loader',
-            'sass-loader',
-          ],
-        },
+            "vue-style-loader",
+            "css-loader",
+            "postcss-loader",
+            "sass-loader"
+          ]
+        }
       }
     }
-  ]
+  ];
 
   let pugLoader = [
     {
-      loader: 'pug-loader',
+      loader: "pug-loader",
       exclude: /\.vue.pug$/,
       options: {
-        pretty: !isProd,
-      },
+        pretty: !isProd
+      }
     },
     {
-      loader: "pug-plain-loader",
+      loader: "pug-plain-loader"
     }
-  ]
+  ];
 
   let styleLoader = [
     // isProd ? { loader: MiniCssExtractPlugin.loader, options: { publicPath: '../' } } : 'vue-style-loader',
-    'vue-style-loader',
+    "vue-style-loader",
     {
       loader: "css-loader",
       options: {
@@ -123,17 +126,17 @@ const generateConfig = (isProd, isCompress) => {
     {
       loader: "postcss-loader",
       options: {
-        ident: 'postcss',
+        ident: "postcss",
         plugins: [
-          require('autoprefixer'),
-          require('postcss-sprites')(spritesConfig)
+          require("autoprefixer"),
+          require("postcss-sprites")(spritesConfig)
         ]
       }
     },
     {
       loader: "sass-loader"
     }
-  ]
+  ];
 
   let imageLoader = [
     {
@@ -141,40 +144,44 @@ const generateConfig = (isProd, isCompress) => {
       options: {
         name: isProd ? "[name]-[hash:5].min.[ext]" : "[name].[ext]",
         limit: 1024 * 10,
-        outputPath: "images",
+        outputPath: "images"
       }
     },
     {
       loader: "img-loader"
     }
-  ]
+  ];
 
   let fontLoader = [
     {
-      loader: 'url-loader',
+      loader: "url-loader",
       options: {
         name: isProd ? "[name]-[hash:5].min.[ext]" : "[name].[ext]",
         limit: 1024 * 5,
-        outputPath: "font",
+        outputPath: "font"
       }
     }
-  ]
+  ];
 
   return {
-    mode: isProd ? 'production' : 'development',
+    mode: isProd ? "production" : "development",
     entry: entries(entriesJs),
     output: {
-      path: path.resolve(ROOT_PATH, 'dist'),
-      publicPath: './',
-      filename: isProd ? "scripts/[name]-[hash:5]-boundle.js" : "scripts/[name].js",
-      chunkFilename: isProd ? "scripts/[name]-[hash:5].chunk.js" : "scripts/[name].js"
+      path: path.resolve(ROOT_PATH, "dist"),
+      publicPath: "./",
+      filename: isProd
+        ? "scripts/[name]-[hash:5]-boundle.js"
+        : "scripts/[name].js",
+      chunkFilename: isProd
+        ? "scripts/[name]-[hash:5].chunk.js"
+        : "scripts/[name].js"
     },
     resolve: {
       alias: {
-        "@src": path.resolve(__dirname, '../src'),
-        'vue$': 'vue/dist/vue.esm.js',
-        'vuex$': 'vuex/dist/vuex.min.js',
-        'axios$': 'axios/dist/axios.min.js'
+        "@src": path.resolve(__dirname, "../src"),
+        vue$: "vue/dist/vue.esm.js",
+        vuex$: "vuex/dist/vuex.min.js",
+        axios$: "axios/dist/axios.min.js"
       }
     },
     module: {
@@ -184,7 +191,7 @@ const generateConfig = (isProd, isCompress) => {
         { test: /\.js$/, use: scriptLoader, exclude: /(node_modules)/ },
         { test: /\.(scss|css)$/, use: styleLoader },
         { test: /\.(png|jpg|jpeg|gif)$/, use: imageLoader },
-        { test: /\.(eot|woff2?|ttf|svg)$/, use: fontLoader },
+        { test: /\.(eot|woff2?|ttf|svg)$/, use: fontLoader }
       ]
     },
     plugins: [
@@ -193,19 +200,20 @@ const generateConfig = (isProd, isCompress) => {
       //   filename: isProd ? 'styles/[name]-[hash:5].css' : "styles/[name].css",
       // }),
       // new GlgWebpackPlugin(),
-      isCompress ? new CompressionPlugin({
-        test: new RegExp(/\.(js|css)$/),
-        threshold: 10240,
-      }) : (() => { })
+      isCompress
+        ? new CompressionPlugin({
+            test: new RegExp(/\.(js|css)$/),
+            threshold: 10240
+          })
+        : () => {}
     ].concat(views())
-  }
-}
+  };
+};
 
 module.exports = env => {
+  let isProd = !!env.production;
+  let isCompress = !!env.compress;
+  let config = isProd ? productionConfig : developmentConfig;
 
-  let isProd = !!env.production
-  let isCompress = !!env.compress
-  let config = isProd ? productionConfig : developmentConfig
-
-  return merge(generateConfig(isProd, isCompress), config)
-}
+  return merge(generateConfig(isProd, isCompress), config);
+};

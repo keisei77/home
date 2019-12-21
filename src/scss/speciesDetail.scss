@@ -1,0 +1,41 @@
+@import "./common.scss";
+
+body {
+  background-color: #fff;
+}
+h1 {
+  width: 100%;
+  height: 174px;
+  line-height: 174px;
+  font-weight: 100;
+  font-family: PingFangSC-Semibold;
+  font-size: 34px;
+  color: #2d2f29;
+  text-align: center;
+}
+h1 strong span {
+  font-weight: 100;
+  font-family: PingFangSC-Semibold;
+}
+p {
+  width: 100%;
+  text-indent: 2em;
+  font-family: PingFangSC-Regular;
+  font-size: 14px;
+  color: #9d9e9c;
+  line-height: 24px;
+  a {
+    color: #9d9e9c;
+    text-decoration: underline;
+  }
+}
+div.media-wrap {
+  text-align: center;
+  a {
+    display: block !important;
+    margin: 0 auto;
+    img {
+      margin: 20px 10px;
+    }
+  }
+}

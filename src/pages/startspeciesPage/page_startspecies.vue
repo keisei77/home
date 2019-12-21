@@ -47,21 +47,8 @@ export default {
     onModalClose() {
       this.isShow = false;
     },
-    beforeShowModal(name) {
-      this.selectedName = name;
-      this.isShow = true;
-      document.querySelector("body").setAttribute("style", "overflow:hidden");
-    },
     showM: function(name) {
-      if (this.list_item[name]) {
-        this.beforeShowModal(name);
-        return;
-      }
-
-      this.$_get(`${API.START_ITEM_DATA}/${name}`).then(data => {
-        this.list_item[name] = data.data.content;
-        this.beforeShowModal(name);
-      });
+      location.href = `/speciesdetail.html?name=${name}`;
     },
     leave() {
       this.one_shade = false;
