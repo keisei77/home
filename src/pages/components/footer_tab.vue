@@ -6,7 +6,8 @@
                span 0872-2504186 | 新浪微博：@大理生物多样性保护与研究中心.
            div(class="right_msg")
                span Copyright © 2015-2017 云山保护
-               span 滇ICP备17007153号-2
+               span 
+                  a(href="http://beian.miit.gov.cn/" target="_blank") 滇ICP备17007153号-2
 </template>
 <script>
 export default {
@@ -47,5 +48,8 @@ export default {
   .right_msg span{
     padding-right: 0px;
     display: block;
+    a:link,a:visited{
+      color:white
+    }
   }
 </style>
