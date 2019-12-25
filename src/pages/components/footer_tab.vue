@@ -5,7 +5,7 @@
                span 云南大理古城苍坪街56号床单厂艺术区C-2-2
                span 0872-2504186 | 新浪微博：@大理生物多样性保护与研究中心.
            div(class="right_msg")
-               span Copyright © 2015-2017 云山保护
+               span Copyright © 2015-2019 云山保护
                span 
                   a(href="http://beian.miit.gov.cn/" target="_blank") 滇ICP备17007153号-2
 </template>
